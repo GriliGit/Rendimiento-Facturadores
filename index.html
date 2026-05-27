@@ -9,236 +9,151 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --navy:   #1E3A5F;
-    --teal:   #00A99D;
-    --red:    #E63946;
-    --amber:  #F4A261;
-    --green:  #2ECC71;
-    --blue:   #3498DB;
-    --bg:     #EEF1F6;
-    --card:   #FFFFFF;
-    --border: #E2E8F0;
-    --text:   #334155;
-    --muted:  #94A3B8;
+    --navy:  #1E3A5F; --teal:  #00A99D; --red:   #E63946;
+    --amber: #F4A261; --green: #2ECC71; --blue:  #3498DB;
+    --bg:    #EEF1F6; --card:  #FFFFFF; --border:#E2E8F0;
+    --text:  #334155; --muted: #94A3B8;
   }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-
+  body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
   /* HEADER */
-  .header {
-    background: var(--navy);
-    color: white;
-    padding: 14px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 12px rgba(30,58,95,0.35);
-  }
-  .header-left { display: flex; align-items: center; gap: 14px; }
-  .logo-box {
-    width: 42px; height: 42px;
-    background: var(--teal);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Space Mono', monospace;
-    font-size: 13px; font-weight: 700; color: white;
-    letter-spacing: -1px;
-  }
-  .header h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
-  .header-sub { font-size: 11px; color: #7EB8D4; margin-top: 2px; }
-  .period-chip {
-    background: rgba(0,169,157,0.25);
-    border: 1px solid var(--teal);
-    color: #7EE8E2;
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 12px; font-weight: 600;
-  }
-  .update-text { font-size: 11px; color: #7EB8D4; }
-
+  .header { background:var(--navy); color:white; padding:14px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(30,58,95,.35); }
+  .header-left { display:flex; align-items:center; gap:14px; }
+  .logo-box { width:42px; height:42px; background:var(--teal); border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:white; }
+  .header h1 { font-size:15px; font-weight:700; }
+  .header-sub { font-size:11px; color:#7EB8D4; margin-top:2px; }
+  .period-chip { background:rgba(0,169,157,.25); border:1px solid var(--teal);
+    color:#7EE8E2; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:600; }
   /* LAYOUT */
-  .main { display: flex; min-height: calc(100vh - 70px); }
-  .sidebar {
-    width: 200px; flex-shrink: 0;
-    background: var(--card);
-    border-right: 1px solid var(--border);
-    padding: 20px 14px;
-    position: sticky; top: 70px;
-    height: calc(100vh - 70px);
-    overflow-y: auto;
-  }
-  .content { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 16px; overflow: hidden; }
-
+  .main { display:flex; min-height:calc(100vh - 70px); }
+  .sidebar { width:205px; flex-shrink:0; background:var(--card);
+    border-right:1px solid var(--border); padding:18px 12px;
+    position:sticky; top:70px; height:calc(100vh - 70px); overflow-y:auto; }
+  .content { flex:1; padding:18px; display:flex; flex-direction:column; gap:14px; overflow:hidden; }
   /* SIDEBAR */
-  .sidebar-section { margin-bottom: 20px; }
-  .sidebar-label {
-    font-size: 10px; font-weight: 700; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 1px;
-    margin-bottom: 8px;
-    display: flex; align-items: center; gap: 5px;
-  }
-  .filter-card {
-    background: #F8FAFC; border: 1px solid var(--border);
-    border-radius: 8px; padding: 8px 10px;
-    font-size: 12px; color: var(--navy); font-weight: 500;
-    margin-bottom: 6px;
-  }
-  .seg-pills { display: flex; gap: 4px; flex-wrap: wrap; }
-  .seg-pill {
-    padding: 4px 9px; border-radius: 6px; font-size: 11px;
-    font-weight: 700; cursor: pointer; border: none;
-    transition: opacity 0.2s;
-  }
-  .pill-all { background: #F4A261; color: white; }
-  .pill-aa  { background: #1E3A5F; color: white; }
-  .pill-a   { background: #00A99D; color: white; }
-  .pill-b   { background: #94A3B8; color: white; }
-  .day-checks { display: flex; flex-direction: column; gap: 5px; }
-  .day-check {
-    display: flex; align-items: center; gap: 7px;
-    font-size: 11px; color: var(--text);
-    padding: 3px 4px; border-radius: 4px;
-  }
-  .day-check input { accent-color: var(--teal); }
-  .day-check.disabled { opacity: 0.38; text-decoration: line-through; }
-  .fact-list { display: flex; flex-direction: column; gap: 5px; }
-  .fact-row {
-    display: flex; align-items: center; gap: 7px;
-    padding: 4px 6px; border-radius: 6px; cursor: pointer;
-    transition: background 0.15s;
-  }
-  .fact-row:hover { background: #F1F5F9; }
-  .avatar {
-    width: 24px; height: 24px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 700; color: white; flex-shrink: 0;
-  }
-  .fact-name { font-size: 11px; font-weight: 500; color: var(--navy); }
-  .tip-box {
-    background: #EFF6FF; border: 1px solid #BFDBFE;
-    border-radius: 8px; padding: 9px 10px;
-    font-size: 10px; color: #3B82F6; line-height: 1.6; margin-top: 12px;
-  }
-
-  /* KPI ROW */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-  }
-  .kpi-card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 16px;
-    border-left: 4px solid var(--teal);
-    box-shadow: 0 1px 5px rgba(0,0,0,0.06);
-    position: relative;
-    overflow: hidden;
-  }
-  .kpi-card::after {
-    content: '';
-    position: absolute; top: 0; right: 0;
-    width: 60px; height: 60px;
-    border-radius: 0 0 0 60px;
-    opacity: 0.06;
-  }
-  .kpi-label { font-size: 11px; color: var(--muted); font-weight: 500; line-height: 1.4; margin-bottom: 8px; }
-  .kpi-value { font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1; font-family: 'Space Mono', monospace; }
-  .kpi-sub { font-size: 10px; color: var(--muted); margin-top: 5px; }
-  .kpi-delta { font-size: 11px; font-weight: 600; margin-top: 4px; }
-  .delta-up { color: #2ECC71; }
-  .delta-down { color: #E63946; }
-  .kpi-badge {
-    position: absolute; top: 10px; right: 10px;
-    font-size: 9px; font-weight: 700;
-    padding: 2px 7px; border-radius: 10px;
-  }
-  .badge-green { background: #DCFCE7; color: #16A34A; }
-  .badge-red   { background: #FEE2E2; color: #E63946; }
-  .badge-blue  { background: #DBEAFE; color: #2563EB; }
-
-  /* CHART CARDS */
-  .chart-row { display: grid; gap: 14px; }
-  .row-2-3 { grid-template-columns: 1.4fr 1fr; }
-  .row-1-1 { grid-template-columns: 1fr 1fr; }
-  .chart-card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.06);
-  }
-
+  .sidebar-section { margin-bottom:18px; }
+  .sidebar-label { font-size:10px; font-weight:700; color:var(--muted);
+    text-transform:uppercase; letter-spacing:1px; margin-bottom:7px; }
+  .filter-card { background:#F8FAFC; border:1px solid var(--border); border-radius:8px;
+    padding:7px 10px; font-size:11px; color:var(--navy); font-weight:500; margin-bottom:5px; }
+  .seg-pills { display:flex; gap:3px; flex-wrap:wrap; }
+  .seg-pill { padding:4px 8px; border-radius:6px; font-size:10px; font-weight:700;
+    cursor:pointer; border:none; transition:opacity .2s; }
+  .pill-all { background:#F4A261; color:white; }
+  .pill-aa  { background:#1E3A5F; color:white; }
+  .pill-a   { background:#00A99D; color:white; }
+  .pill-b   { background:#94A3B8; color:white; }
+  .day-checks { display:flex; flex-direction:column; gap:4px; }
+  .day-check { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text);
+    padding:2px 4px; border-radius:4px; }
+  .day-check input { accent-color:var(--teal); }
+  .day-check.disabled { opacity:.38; text-decoration:line-through; }
+  .fact-list { display:flex; flex-direction:column; gap:4px; max-height:220px; overflow-y:auto; }
+  .fact-row { display:flex; align-items:center; gap:7px; padding:3px 6px;
+    border-radius:6px; cursor:pointer; transition:background .15s; }
+  .fact-row:hover { background:#F1F5F9; }
+  .avatar { width:22px; height:22px; border-radius:50%; display:flex; align-items:center;
+    justify-content:center; font-size:8px; font-weight:700; color:white; flex-shrink:0; }
+  .fact-name { font-size:11px; font-weight:500; color:var(--navy); }
+  .seg-legend { margin-top:10px; }
+  .seg-item { display:flex; align-items:flex-start; gap:6px; font-size:10px;
+    color:var(--text); margin-bottom:6px; line-height:1.4; }
+  .seg-badge { flex-shrink:0; width:20px; height:20px; border-radius:4px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:9px; font-weight:700; color:white; }
+  .tip-box { background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px;
+    padding:8px 10px; font-size:10px; color:#3B82F6; line-height:1.6; margin-top:10px; }
+  /* KPI */
+  .kpi-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+  .kpi-card { background:var(--card); border-radius:12px; padding:14px 16px;
+    border-left:4px solid var(--teal); box-shadow:0 1px 5px rgba(0,0,0,.06); position:relative; }
+  .kpi-label { font-size:10px; color:var(--muted); font-weight:500; line-height:1.4; margin-bottom:7px; }
+  .kpi-value { font-size:26px; font-weight:700; color:var(--navy); line-height:1;
+    font-family:'Space Mono',monospace; }
+  .kpi-sub { font-size:10px; color:var(--muted); margin-top:4px; }
+  .kpi-delta { font-size:11px; font-weight:600; margin-top:4px; }
+  .delta-up { color:#2ECC71; } .delta-down { color:#E63946; }
+  .kpi-badge { position:absolute; top:10px; right:10px; font-size:9px; font-weight:700;
+    padding:2px 7px; border-radius:10px; }
+  .badge-green { background:#DCFCE7; color:#16A34A; }
+  .badge-red   { background:#FEE2E2; color:#E63946; }
+  .badge-blue  { background:#DBEAFE; color:#2563EB; }
+  /* CHARTS */
+  .chart-row { display:grid; gap:12px; }
+  .row-2-3 { grid-template-columns:1.4fr 1fr; }
+  .row-1-1 { grid-template-columns:1fr 1fr; }
+  .chart-card { background:var(--card); border-radius:12px; padding:16px;
+    box-shadow:0 1px 5px rgba(0,0,0,.06); }
   /* TABLE */
-  .table-card {
-    background: var(--card);
-    border-radius: 12px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.06);
-    overflow: hidden;
-  }
-  .table-header {
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .table-title { font-size: 13px; font-weight: 700; color: var(--navy); }
-  .table-sub { font-size: 11px; color: var(--muted); }
-  .data-table { width: 100%; border-collapse: collapse; }
-  .data-table th {
-    background: #F8FAFC; padding: 9px 12px;
-    font-size: 11px; font-weight: 700; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.6px;
-    border-bottom: 1px solid var(--border); text-align: center;
-  }
-  .data-table th:first-child { text-align: left; }
-  .data-table td { padding: 0; border-bottom: 1px solid #F1F5F9; font-size: 12px; }
-  .data-table tr:last-child td { border-bottom: none; }
-
+  .table-card { background:var(--card); border-radius:12px;
+    box-shadow:0 1px 5px rgba(0,0,0,.06); overflow:hidden; }
+  .table-header { padding:12px 18px; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; }
+  .table-title { font-size:13px; font-weight:700; color:var(--navy); }
+  .table-sub { font-size:11px; color:var(--muted); }
+  .data-table { width:100%; border-collapse:collapse; }
+  .data-table th { background:#F8FAFC; padding:8px 10px; font-size:10px; font-weight:700;
+    color:var(--muted); text-transform:uppercase; letter-spacing:.6px;
+    border-bottom:1px solid var(--border); text-align:center; }
+  .data-table th:first-child { text-align:left; }
+  .data-table td { padding:0; border-bottom:1px solid #F1F5F9; font-size:12px; }
+  .data-table tr:last-child td { border-bottom:none; }
   /* LEGEND */
-  .legend-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
-  .leg-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .leg-line { width: 18px; height: 3px; border-radius: 2px; }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+  .legend-row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .legend-item { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--muted); }
+  .leg-dot { width:10px; height:10px; border-radius:50%; }
+  ::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-thumb { background:#CBD5E1; border-radius:3px; }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════ HEADER ═══════════════════════ -->
 <div class="header">
   <div class="header-left">
     <div class="logo-box">TRT</div>
     <div>
       <h1>Eficiencia de Facturadores &mdash; TRT FOOD</h1>
-      <div class="header-sub">SAP HANA · TRT_PROD · OINV + INV1 + OUSR · Solo días hábiles L&ndash;V</div>
+      <div class="header-sub">SAP HANA · TRT_PROD · OINV + INV1 + OUSR + OCRD · Solo días hábiles L&ndash;V</div>
     </div>
   </div>
   <div style="display:flex;align-items:center;gap:12px;">
-    <div class="period-chip">Mayo 2026</div>
-    <div class="update-text">&#x1F4CA; 21 días hábiles · Simulación generativa</div>
+    <div class="period-chip">01/01/2026 &ndash; 26/05/2026</div>
+    <div style="font-size:11px;color:#a8c4e0;">&#x1F4CA; 104 días hábiles · 187,233 líneas activas</div>
   </div>
 </div>
 
-<!-- ═══════════════════════ MAIN ═══════════════════════ -->
 <div class="main">
-
-  <!-- SIDEBAR -->
   <div class="sidebar">
+
     <div class="sidebar-section">
-      <div class="sidebar-label">&#9881; Filtros</div>
-      <div class="filter-card">&#x1F4C5; 01/05/2026 &ndash; 31/05/2026</div>
+      <div class="sidebar-label">&#9881; Período</div>
+      <div class="filter-card">&#x1F4C5; 01/01/2026 &ndash; 26/05/2026</div>
+      <div class="filter-card" style="margin-top:4px">&#x1F4CB; 104 días hábiles</div>
     </div>
 
     <div class="sidebar-section">
-      <div class="sidebar-label">Segmento</div>
+      <div class="sidebar-label">Segmento Operativo</div>
       <div class="seg-pills">
         <button class="seg-pill pill-all">Todos</button>
         <button class="seg-pill pill-aa">AA</button>
         <button class="seg-pill pill-a">A</button>
         <button class="seg-pill pill-b">B</button>
+      </div>
+      <div class="seg-legend" style="margin-top:8px">
+        <div class="seg-item">
+          <div class="seg-badge" style="background:#1E3A5F">AA</div>
+          <span style="font-size:9px;color:#64748b">&ge;13 líneas/fact<br>El Rancho, HEB, Rowe's IGA, Talpa</span>
+        </div>
+        <div class="seg-item">
+          <div class="seg-badge" style="background:#00A99D">A</div>
+          <span style="font-size:9px;color:#64748b">8–12 líneas/fact<br>Distribuidor, Fiesta Mart, Independiente, Key Food Group, Mayoristas</span>
+        </div>
+        <div class="seg-item">
+          <div class="seg-badge" style="background:#94A3B8">B</div>
+          <span style="font-size:9px;color:#64748b">&lt;8 líneas/fact<br>CVS, Fiesta, Fresco y Mas, Milan's Market, Presidente, Restaurant Depot, Sedanos, Sin Cadena, Wal-Mart, Walgreens, Winn-Dixie</span>
+        </div>
       </div>
     </div>
 
@@ -256,75 +171,83 @@
     </div>
 
     <div class="sidebar-section">
-      <div class="sidebar-label">Facturador</div>
-      <div class="fact-list">
-        <div class="fact-row"><div class="avatar" style="background:#1E3A5F">MA</div><span class="fact-name">M. Alvarado</span></div><div class="fact-row"><div class="avatar" style="background:#00A99D">RC</div><span class="fact-name">R. Castro</span></div><div class="fact-row"><div class="avatar" style="background:#7C3AED">SM</div><span class="fact-name">S. Méndez</span></div><div class="fact-row"><div class="avatar" style="background:#F4A261">JR</div><span class="fact-name">J. Rodríguez</span></div><div class="fact-row"><div class="avatar" style="background:#E63946">LP</div><span class="fact-name">L. Pérez</span></div>
-      </div>
+      <div class="sidebar-label">Facturador (15)</div>
+      <div class="fact-list"><div class="fact-row"><div class="avatar" style="background:#1E3A5F">AE</div><span class="fact-name">Alexander Espinel</span></div><div class="fact-row"><div class="avatar" style="background:#00A99D">AA</div><span class="fact-name">Alix Agudelo</span></div><div class="fact-row"><div class="avatar" style="background:#7C3AED">CC</div><span class="fact-name">Ciro Camerlingo</span></div><div class="fact-row"><div class="avatar" style="background:#F4A261">EM</div><span class="fact-name">Elvis Martin</span></div><div class="fact-row"><div class="avatar" style="background:#E63946">ED</div><span class="fact-name">Endrina Diaz</span></div><div class="fact-row"><div class="avatar" style="background:#2563EB">FM</div><span class="fact-name">Faubricio Malcotti</span></div><div class="fact-row"><div class="avatar" style="background:#16A34A">JS</div><span class="fact-name">Jesus Segovia</span></div><div class="fact-row"><div class="avatar" style="background:#D97706">KC</div><span class="fact-name">Karlys Cedeño</span></div><div class="fact-row"><div class="avatar" style="background:#9333EA">LD</div><span class="fact-name">Lorianna Duno</span></div><div class="fact-row"><div class="avatar" style="background:#0891B2">MG</div><span class="fact-name">Maria Goncalves</span></div><div class="fact-row"><div class="avatar" style="background:#DC2626">SS</div><span class="fact-name">Simón Suarez</span></div><div class="fact-row"><div class="avatar" style="background:#65A30D">YN</div><span class="fact-name">Yeferly Neyaly</span></div><div class="fact-row"><div class="avatar" style="background:#7C3AED">CP</div><span class="fact-name">cpinto</span></div><div class="fact-row"><div class="avatar" style="background:#C2410C">CV</div><span class="fact-name">cvelasquez</span></div><div class="fact-row"><div class="avatar" style="background:#1E3A5F">RB</div><span class="fact-name">rbautista</span></div></div>
     </div>
 
     <div class="tip-box">
-      <strong>&#x1F4A1; Tip:</strong> En Power BI, haz clic derecho sobre un facturador para abrir su página de Drill-Through con detalle completo.
+      <strong>&#x1F4A1;</strong> Segmento derivado de líneas promedio por factura por cadena.<br>
+      Umbral semáforo: &plusmn;15% y &minus;30% del promedio del equipo.
     </div>
   </div>
 
-  <!-- CONTENT -->
   <div class="content">
 
-    <!-- KPI ROW -->
     <div class="kpi-grid">
       <div class="kpi-card" style="border-left-color:var(--teal)">
         <div class="kpi-badge badge-blue">Equipo</div>
         <div class="kpi-label">Líneas / Día Hábil<br><small>Promedio equipo</small></div>
-        <div class="kpi-value">182</div>
+        <div class="kpi-value">129</div>
         <div class="kpi-delta delta-up">&#9650; Benchmark del período</div>
       </div>
       <div class="kpi-card" style="border-left-color:var(--blue)">
         <div class="kpi-badge badge-blue">Equipo</div>
         <div class="kpi-label">Facturas / Día Hábil<br><small>Promedio equipo</small></div>
-        <div class="kpi-value">27</div>
+        <div class="kpi-value">16</div>
         <div class="kpi-delta delta-up">&#9650; Base de comparación</div>
       </div>
       <div class="kpi-card" style="border-left-color:#16A34A">
         <div class="kpi-badge badge-green">&#x1F3C6; Top</div>
         <div class="kpi-label">Mejor Facturador<br><small>del período</small></div>
-        <div class="kpi-value" style="font-size:16px;margin-top:4px">M. Alvarado</div>
-        <div class="kpi-sub" style="color:var(--teal);font-weight:600">361 líneas/día · Seg. AA</div>
+        <div class="kpi-value" style="font-size:15px;margin-top:4px">Alix Agudelo</div>
+        <div class="kpi-sub" style="color:var(--teal);font-weight:600">303 líneas/día · Seg. B</div>
       </div>
-      <div class="kpi-card" style="border-left-color:#F4A261">
-        <div class="kpi-badge" style="background:#FEF2F2;color:#F4A261;font-weight:700">✓ 3.0%</div>
-        <div class="kpi-label">Tasa Anulados<br><small>Umbral: 3%</small></div>
-        <div class="kpi-value" style="color:#F4A261">3.0%</div>
-        <div class="kpi-delta delta-up">✓ Dentro del umbral</div>
+      <div class="kpi-card" style="border-left-color:#E63946">
+        <div class="kpi-badge" style="background:#FEF2F2;color:#E63946;font-weight:700">⚠ 28.8%</div>
+        <div class="kpi-label">Tasa Anulados (Y+C)<br><small>Umbral: 3%</small></div>
+        <div class="kpi-value" style="color:#E63946">28.8%</div>
+        <div class="kpi-delta delta-down">▲ Por encima del umbral</div>
       </div>
       <div class="kpi-card" style="border-left-color:var(--muted)">
         <div class="kpi-label">Días Hábiles<br><small>en el período</small></div>
-        <div class="kpi-value">21</div>
-        <div class="kpi-sub">Mayo 2026 · L&ndash;V</div>
+        <div class="kpi-value">104</div>
+        <div class="kpi-sub">01/01/2026 &ndash; 26/05/2026</div>
       </div>
     </div>
 
-    <!-- CHARTS ROW 1 -->
     <div class="chart-row row-2-3">
       <div class="chart-card">
         <div id="g1" style="width:100%"></div>
         <div class="legend-row" style="margin-top:8px">
-          <div class="legend-item"><div class="leg-dot" style="background:#2ECC71"></div>&ge; +15% promedio</div>
-          <div class="legend-item"><div class="leg-dot" style="background:#3498DB"></div>&plusmn;15% promedio</div>
-          <div class="legend-item"><div class="leg-dot" style="background:#F4A261"></div>&lt; &minus;15%</div>
-          <div class="legend-item"><div class="leg-dot" style="background:#E63946"></div>&lt; &minus;30% &#9888;</div>
+          <div class="legend-item"><div class="leg-dot" style="background:#2ECC71"></div>&ge;+15% prom.</div>
+          <div class="legend-item"><div class="leg-dot" style="background:#3498DB"></div>&plusmn;15% prom.</div>
+          <div class="legend-item"><div class="leg-dot" style="background:#F4A261"></div>&lt;&minus;15%</div>
+          <div class="legend-item"><div class="leg-dot" style="background:#E63946"></div>&lt;&minus;30% &#9888;</div>
         </div>
       </div>
       <div class="chart-card">
         <div id="g2" style="width:100%"></div>
-        <div style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:6px;padding:8px 10px;margin-top:8px;font-size:11px;color:#92400E;line-height:1.5">
-          <strong>&#x1F4A1; Insight:</strong> Usa este gráfico para contextualizar el ranking. Un facturador 70% Seg. B tiene más facturas cortas — su benchmark de líneas/día debe ser distinto al de un perfil 75% AA.
+        <div style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:6px;
+             padding:7px 9px;margin-top:8px;font-size:10px;color:#92400E;line-height:1.5">
+          <strong>&#x1F4A1;</strong> Segmento derivado de líneas promedio reales por cadena.
+          Facturadores con alto % AA procesan facturas más complejas — su benchmark de líneas/día es naturalmente menor.
         </div>
       </div>
     </div>
 
-    <!-- CHARTS ROW 2 -->
     <div class="chart-row row-1-1">
       <div class="chart-card">
+        <!-- G3 HEADER + FILTRO VENDEDOR -->
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap;">
+          <div style="font-size:13px;font-weight:700;color:#1E3A5F;">G3 &middot; Tendencia Diaria de L&iacute;neas (L&ndash;V)</div>
+          <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;">
+            <button onclick="g3SetTop5()" class="g3btn g3btn-primary" id="btn-top5">Top 5</button>
+            <button onclick="g3SetAll()"  class="g3btn" id="btn-all">Todos</button>
+            <button onclick="g3Clear()"   class="g3btn g3btn-danger" id="btn-none">Limpiar</button>
+          </div>
+        </div>
+        <!-- CHECKBOXES VENDEDOR -->
+        <div id="g3-filters" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;"></div>
         <div id="g3" style="width:100%"></div>
       </div>
       <div class="chart-card">
@@ -338,14 +261,16 @@
       </div>
     </div>
 
-    <!-- TABLE -->
     <div class="table-card">
       <div class="table-header">
         <div>
-          <div class="table-title">Resumen por Facturador — Período completo</div>
-          <div class="table-sub">Formato condicional activado · Verde ≥+15% · Azul ±15% · Ámbar &lt;−15% · Rojo &lt;−30% del promedio</div>
+          <div class="table-title">Resumen por Facturador &mdash; Data real SAP HANA</div>
+          <div class="table-sub">Verde &ge;+15% · Azul &plusmn;15% · &Aacute;mbar &lt;&minus;15% · Rojo &lt;&minus;30% del promedio equipo</div>
         </div>
-        <div style="font-size:11px;color:var(--muted)">Promedio equipo: <strong style="color:var(--navy)">181.8 líneas/día</strong></div>
+        <div style="font-size:11px;color:var(--muted)">
+          Benchmark: <strong style="color:var(--navy)">128.6 líneas/día</strong>
+          &nbsp;|&nbsp; Excluye facturadores con &lt;3 días activos del promedio
+        </div>
       </div>
       <table class="data-table">
         <thead>
@@ -355,130 +280,503 @@
             <th>Facturas/Día</th>
             <th>Líneas/Factura</th>
             <th>Monto Total</th>
-            <th>% Cancelados</th>
-            <th>Mix Segmento (AA / A / B)</th>
+            <th>% Anulados</th>
+            <th>Días Activos</th>
+            <th>Mix Seg. (AA / A / B)</th>
           </tr>
         </thead>
         <tbody>
-          
-    <tr style="background:#e8faf0;">
+    <tr style="background:#F0FDF4;">
       <td style="padding:8px 12px;">
         <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:#1E3A5F;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700;flex-shrink:0">MA</div>
-          <span style="font-weight:600;color:#1E3A5F">M. Alvarado</span>
+          <div style="width:28px;height:28px;border-radius:50%;background:#00A99D;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">AA</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Alix Agudelo</span>
+            <span style="font-size:9px;font-weight:600;color:#D97706">🟡 Mix WM (58%)</span>
+          </div>
         </div>
       </td>
-      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">360.8</td>
-      <td style="text-align:center">37.5</td>
-      <td style="text-align:center">9.6</td>
-      <td style="text-align:center">$4,111,495</td>
-      <td style="text-align:center;color:#E63946;font-weight:700;">3.3%</td>
-      <td style="text-align:center">
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">302.8</td>
+      <td style="text-align:center">41.2</td>
+      <td style="text-align:center">7.4</td>
+      <td style="text-align:center">$2,167,366</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">22.2%</td>
+      <td style="text-align:center">101 días</td>
+      <td style="text-align:center;">
         <div style="display:flex;gap:2px;justify-content:center">
-          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 5px;font-size:10px">88%</span>
-          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 5px;font-size:10px">11%</span>
-          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 5px;font-size:10px">1%</span>
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">20%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">79%</span>
         </div>
       </td>
     </tr>
-    <tr style="background:#e8faf0;">
+    <tr style="background:#F0FDF4;">
       <td style="padding:8px 12px;">
         <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:#00A99D;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700;flex-shrink:0">RC</div>
-          <span style="font-weight:600;color:#1E3A5F">R. Castro</span>
+          <div style="width:28px;height:28px;border-radius:50%;background:#DC2626;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">SS</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Simón Suarez</span>
+            <span style="font-size:9px;font-weight:600;color:#D97706">🟡 Mix WM (39%)</span>
+          </div>
         </div>
       </td>
-      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">241.3</td>
-      <td style="text-align:center">31.4</td>
-      <td style="text-align:center">7.7</td>
-      <td style="text-align:center">$2,744,411</td>
-      <td style="text-align:center;">2.2%</td>
-      <td style="text-align:center">
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">253.1</td>
+      <td style="text-align:center">24.5</td>
+      <td style="text-align:center">10.4</td>
+      <td style="text-align:center">$2,298,945</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">17.5%</td>
+      <td style="text-align:center">102 días</td>
+      <td style="text-align:center;">
         <div style="display:flex;gap:2px;justify-content:center">
-          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 5px;font-size:10px">67%</span>
-          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 5px;font-size:10px">30%</span>
-          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 5px;font-size:10px">3%</span>
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">19%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">33%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">48%</span>
         </div>
       </td>
     </tr>
-    <tr style="background:#eff6ff;">
+    <tr style="background:#F0FDF4;">
       <td style="padding:8px 12px;">
         <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:#7C3AED;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700;flex-shrink:0">SM</div>
-          <span style="font-weight:600;color:#1E3A5F">S. Méndez</span>
+          <div style="width:28px;height:28px;border-radius:50%;background:#D97706;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">KC</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Karlys Cedeño</span>
+            <span style="font-size:9px;font-weight:600;color:#D97706">🟡 Mix WM (52%)</span>
+          </div>
         </div>
       </td>
-      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">175.3</td>
-      <td style="text-align:center">30.1</td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">216.8</td>
+      <td style="text-align:center">32.4</td>
+      <td style="text-align:center">6.7</td>
+      <td style="text-align:center">$1,287,782</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">27.0%</td>
+      <td style="text-align:center">93 días</td>
+      <td style="text-align:center;">
+        <div style="display:flex;gap:2px;justify-content:center">
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">7%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">37%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">56%</span>
+        </div>
+      </td>
+    </tr>
+    <tr style="background:#F0FDF4;">
+      <td style="padding:8px 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#65A30D;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">YN</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Yeferly Neyaly</span>
+            <span style="font-size:9px;font-weight:600;color:#D97706">🟡 Mix WM (53%)</span>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">206.7</td>
+      <td style="text-align:center">31.2</td>
+      <td style="text-align:center">6.6</td>
+      <td style="text-align:center">$1,840,790</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">27.2%</td>
+      <td style="text-align:center">101 días</td>
+      <td style="text-align:center;">
+        <div style="display:flex;gap:2px;justify-content:center">
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">40%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">60%</span>
+        </div>
+      </td>
+    </tr>
+    <tr style="background:#F0FDF4;">
+      <td style="padding:8px 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#C2410C;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">CV</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">cvelasquez</span>
+            <span style="font-size:9px;font-weight:600;color:#64748B">⚪ Sin WM (28%)</span>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">198.9</td>
+      <td style="text-align:center">20.1</td>
+      <td style="text-align:center">9.9</td>
+      <td style="text-align:center">$2,583,457</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">22.6%</td>
+      <td style="text-align:center">102 días</td>
+      <td style="text-align:center;">
+        <div style="display:flex;gap:2px;justify-content:center">
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">15%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">50%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">35%</span>
+        </div>
+      </td>
+    </tr>
+    <tr style="background:#F0FDF4;">
+      <td style="padding:8px 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#9333EA;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">LD</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Lorianna Duno</span>
+            <span style="font-size:9px;font-weight:600;color:#64748B">⚪ Sin WM (23%)</span>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">180.8</td>
+      <td style="text-align:center">25.3</td>
+      <td style="text-align:center">7.2</td>
+      <td style="text-align:center">$1,378,587</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">22.3%</td>
+      <td style="text-align:center">101 días</td>
+      <td style="text-align:center;">
+        <div style="display:flex;gap:2px;justify-content:center">
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">46%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">53%</span>
+        </div>
+      </td>
+    </tr>
+    <tr style="background:#F0FDF4;">
+      <td style="padding:8px 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#E63946;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">ED</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Endrina Diaz</span>
+            <span style="font-size:9px;font-weight:600;color:#1D4ED8">🔵 Esp. WM (77%)</span>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">180.3</td>
+      <td style="text-align:center">17.4</td>
+      <td style="text-align:center">10.4</td>
+      <td style="text-align:center">$1,122,304</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">51.5%</td>
+      <td style="text-align:center">101 días</td>
+      <td style="text-align:center;">
+        <div style="display:flex;gap:2px;justify-content:center">
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">2%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">11%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">87%</span>
+        </div>
+      </td>
+    </tr>
+    <tr style="background:#EFF6FF;">
+      <td style="padding:8px 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#0891B2;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">MG</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Maria Goncalves</span>
+            <span style="font-size:9px;font-weight:600;color:#D97706">🟡 Mix WM (52%)</span>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">144.1</td>
+      <td style="text-align:center">14.2</td>
+      <td style="text-align:center">10.2</td>
+      <td style="text-align:center">$1,272,174</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">17.4%</td>
+      <td style="text-align:center">98 días</td>
+      <td style="text-align:center;">
+        <div style="display:flex;gap:2px;justify-content:center">
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">7%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">32%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">61%</span>
+        </div>
+      </td>
+    </tr>
+    <tr style="background:#FEF2F2;">
+      <td style="padding:8px 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#1E3A5F;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">AE</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Alexander Espinel</span>
+            <span style="font-size:9px;font-weight:600;color:#64748B">⚪ Sin WM (11%)</span>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">59.8</td>
       <td style="text-align:center">5.8</td>
-      <td style="text-align:center">$1,965,568</td>
-      <td style="text-align:center;color:#E63946;font-weight:700;">3.5%</td>
-      <td style="text-align:center">
+      <td style="text-align:center">10.4</td>
+      <td style="text-align:center">$5,076,956</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">37.0%</td>
+      <td style="text-align:center">101 días</td>
+      <td style="text-align:center;">
         <div style="display:flex;gap:2px;justify-content:center">
-          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 5px;font-size:10px">46%</span>
-          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 5px;font-size:10px">46%</span>
-          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 5px;font-size:10px">8%</span>
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">81%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">19%</span>
         </div>
       </td>
     </tr>
-    <tr style="background:#fef2f2;">
+    <tr style="background:#FEF2F2;">
       <td style="padding:8px 12px;">
         <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:#F4A261;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700;flex-shrink:0">JR</div>
-          <span style="font-weight:600;color:#1E3A5F">J. Rodríguez</span>
+          <div style="width:28px;height:28px;border-radius:50%;background:#7C3AED;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">CC</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Ciro Camerlingo</span>
+            <span style="font-size:9px;font-weight:600;color:#D97706">🟡 Mix WM (62%)</span>
+          </div>
         </div>
       </td>
-      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">75.3</td>
-      <td style="text-align:center">21.8</td>
-      <td style="text-align:center">3.5</td>
-      <td style="text-align:center">$857,752</td>
-      <td style="text-align:center;">2.5%</td>
-      <td style="text-align:center">
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">42.9</td>
+      <td style="text-align:center">4.7</td>
+      <td style="text-align:center">9.1</td>
+      <td style="text-align:center">$1,021,578</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">50.2%</td>
+      <td style="text-align:center">85 días</td>
+      <td style="text-align:center;">
         <div style="display:flex;gap:2px;justify-content:center">
-          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 5px;font-size:10px">14%</span>
-          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 5px;font-size:10px">58%</span>
-          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 5px;font-size:10px">29%</span>
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">4%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">7%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">90%</span>
         </div>
       </td>
     </tr>
-    <tr style="background:#fef2f2;">
+    <tr style="background:#FEF2F2;">
       <td style="padding:8px 12px;">
         <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:#E63946;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700;flex-shrink:0">LP</div>
-          <span style="font-weight:600;color:#1E3A5F">L. Pérez</span>
+          <div style="width:28px;height:28px;border-radius:50%;background:#7C3AED;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">CP</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">cpinto</span>
+            <span style="font-size:9px;font-weight:600;color:#64748B">⚪ Sin WM (0%)</span>
+          </div>
         </div>
       </td>
-      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">56.2</td>
-      <td style="text-align:center">14.8</td>
-      <td style="text-align:center">3.8</td>
-      <td style="text-align:center">$667,971</td>
-      <td style="text-align:center;color:#E63946;font-weight:700;">3.4%</td>
-      <td style="text-align:center">
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">9.2</td>
+      <td style="text-align:center">0.5</td>
+      <td style="text-align:center">17.1</td>
+      <td style="text-align:center">$298,420</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">8.4%</td>
+      <td style="text-align:center">35 días</td>
+      <td style="text-align:center;">
         <div style="display:flex;gap:2px;justify-content:center">
-          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 5px;font-size:10px">38%</span>
-          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 5px;font-size:10px">33%</span>
-          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 5px;font-size:10px">29%</span>
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">100%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
         </div>
       </td>
     </tr>
-        </tbody>
+    <tr style="background:#FEF2F2;">
+      <td style="padding:8px 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#16A34A;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">JS</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Jesus Segovia</span>
+            <span style="font-size:9px;font-weight:600;color:#64748B">⚪ Sin WM (15%)</span>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">4.3</td>
+      <td style="text-align:center">0.5</td>
+      <td style="text-align:center">8.9</td>
+      <td style="text-align:center">$327,087</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">50.7%</td>
+      <td style="text-align:center">35 días</td>
+      <td style="text-align:center;">
+        <div style="display:flex;gap:2px;justify-content:center">
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">81%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">19%</span>
+        </div>
+      </td>
+    </tr>
+    <tr style="background:#FEF2F2;">
+      <td style="padding:8px 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#F4A261;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">EM</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Elvis Martin</span>
+            <span style="font-size:9px;font-weight:600;color:#64748B">⚪ Sin WM (0%)</span>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">0.1</td>
+      <td style="text-align:center">0.0</td>
+      <td style="text-align:center">2.0</td>
+      <td style="text-align:center">$17,492</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">14.3%</td>
+      <td style="text-align:center">3 días</td>
+      <td style="text-align:center;">
+        <div style="display:flex;gap:2px;justify-content:center">
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">100%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+        </div>
+      </td>
+    </tr>
+    <tr style="background:#FEF2F2;">
+      <td style="padding:8px 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#2563EB;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">FM</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">Faubricio Malcotti</span>
+            <span style="font-size:9px;font-weight:600;color:#64748B">⚪ Sin WM (4%)</span>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">0.0</td>
+      <td style="text-align:center">0.2</td>
+      <td style="text-align:center">0.0</td>
+      <td style="text-align:center">$109,776</td>
+      <td style="text-align:center;color:#E63946;font-weight:700;">30.8%</td>
+      <td style="text-align:center">20 días</td>
+      <td style="text-align:center;">
+        <div style="display:flex;gap:2px;justify-content:center">
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">96%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">4%</span>
+        </div>
+      </td>
+    </tr>
+    <tr style="background:#FEF2F2;">
+      <td style="padding:8px 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#1E3A5F;
+               display:flex;align-items:center;justify-content:center;
+               color:white;font-size:9px;font-weight:700;flex-shrink:0">RB</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-weight:600;color:#1E3A5F">rbautista</span>
+            <span style="font-size:9px;font-weight:600;color:#1D4ED8">🔵 Esp. WM (100%)</span>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center;font-weight:700;font-size:15px;color:#1E3A5F">0.0</td>
+      <td style="text-align:center">0.0</td>
+      <td style="text-align:center">0.0</td>
+      <td style="text-align:center">$1,156</td>
+      <td style="text-align:center;">0.0%</td>
+      <td style="text-align:center">2 días</td>
+      <td style="text-align:center;">
+        <div style="display:flex;gap:2px;justify-content:center">
+          <span style="background:#1E3A5F;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+          <span style="background:#00A99D;color:white;border-radius:3px;padding:1px 6px;font-size:10px">0%</span>
+          <span style="background:#94a3b8;color:white;border-radius:3px;padding:1px 6px;font-size:10px">100%</span>
+        </div>
+      </td>
+    </tr></tbody>
       </table>
     </div>
 
-    <div style="text-align:center;font-size:11px;color:var(--muted);padding:8px 0">
-      &#x1F4CA; Datos simulados con distribuciones basadas en OINV + INV1 + OUSR (SAP HANA · TRT_PROD) · 
-      Solo días hábiles L&ndash;V · 19,673 registros generados
+    <div style="text-align:center;font-size:11px;color:var(--muted);padding:6px 0">
+      &#x1F4CA; Fuente: SAP HANA · TRT_PROD · 294,553 registros totales ·
+      187,233 líneas activas (excl. Y+C y fines de semana) ·
+      15 facturadores
     </div>
 
   </div>
 </div>
 
+<style>
+  .g3btn {
+    font-size:10px; font-weight:600; padding:4px 10px; border-radius:6px;
+    border:1px solid #E2E8F0; background:#F8FAFC; color:#475569;
+    cursor:pointer; transition:all .15s; font-family:'DM Sans',sans-serif;
+  }
+  .g3btn:hover { background:#E2E8F0; }
+  .g3btn-primary { background:#1E3A5F; color:white; border-color:#1E3A5F; }
+  .g3btn-primary:hover { background:#162d4a; }
+  .g3btn-danger { background:#FEF2F2; color:#E63946; border-color:#FECACA; }
+  .g3btn-danger:hover { background:#FEE2E2; }
+  .g3-check-label {
+    display:flex; align-items:center; gap:5px; font-size:11px; font-weight:500;
+    color:#334155; padding:3px 8px; border-radius:6px; cursor:pointer;
+    border:1px solid #E2E8F0; background:#F8FAFC; transition:all .15s;
+    user-select:none;
+  }
+  .g3-check-label:hover { background:#EFF6FF; }
+  .g3-check-label.active { border-color: var(--c); background: color-mix(in srgb, var(--c) 12%, white); }
+  .g3-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+</style>
 <script>
-  const cfg = {responsive: true, displayModeBar: false};
-  Plotly.newPlot('g1', {"data":[{"hovertemplate":"\u003cb\u003eL. P\u00e9rez\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 56.2\u003cbr\u003eFacturas\u002fd\u00eda: 14.8\u003cbr\u003eSeg. predominante: AA\u003cbr\u003eCancelados: 3.4%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946"},"orientation":"h","showlegend":false,"text":" 56","textfont":{"color":"#1E3A5F","size":12},"textposition":"outside","x":[56.2],"y":["L. P\u00e9rez"],"type":"bar"},{"hovertemplate":"\u003cb\u003eJ. Rodr\u00edguez\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 75.3\u003cbr\u003eFacturas\u002fd\u00eda: 21.8\u003cbr\u003eSeg. predominante: A\u003cbr\u003eCancelados: 2.5%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946"},"orientation":"h","showlegend":false,"text":" 75","textfont":{"color":"#1E3A5F","size":12},"textposition":"outside","x":[75.3],"y":["J. Rodr\u00edguez"],"type":"bar"},{"hovertemplate":"\u003cb\u003eS. M\u00e9ndez\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 175.3\u003cbr\u003eFacturas\u002fd\u00eda: 30.1\u003cbr\u003eSeg. predominante: AA\u003cbr\u003eCancelados: 3.5%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#3498DB"},"orientation":"h","showlegend":false,"text":" 175","textfont":{"color":"#1E3A5F","size":12},"textposition":"outside","x":[175.3],"y":["S. M\u00e9ndez"],"type":"bar"},{"hovertemplate":"\u003cb\u003eR. Castro\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 241.3\u003cbr\u003eFacturas\u002fd\u00eda: 31.4\u003cbr\u003eSeg. predominante: AA\u003cbr\u003eCancelados: 2.2%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#2ECC71"},"orientation":"h","showlegend":false,"text":" 241","textfont":{"color":"#1E3A5F","size":12},"textposition":"outside","x":[241.3],"y":["R. Castro"],"type":"bar"},{"hovertemplate":"\u003cb\u003eM. Alvarado\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 360.8\u003cbr\u003eFacturas\u002fd\u00eda: 37.5\u003cbr\u003eSeg. predominante: AA\u003cbr\u003eCancelados: 3.3%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#2ECC71"},"orientation":"h","showlegend":false,"text":" 361","textfont":{"color":"#1E3A5F","size":12},"textposition":"outside","x":[360.8],"y":["M. Alvarado"],"type":"bar"}],"layout":{"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#F4A261","dash":"dash","width":2},"type":"line","x0":181.8,"x1":181.8,"xref":"x","y0":0,"y1":1,"yref":"y domain"}],"annotations":[{"font":{"color":"#F4A261","size":11},"showarrow":false,"text":"Prom. 181.8","x":181.8,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"}],"title":{"font":{"size":13,"color":"#1E3A5F"},"text":"\u003cb\u003eG1 \u00b7 Ranking L\u00edneas \u002f D\u00eda H\u00e1bil\u003c\u002fb\u003e","x":0},"margin":{"l":0,"r":60,"t":40,"b":10},"xaxis":{"showgrid":true,"gridcolor":"#EEF1F5","title":{"text":"L\u00edneas\u002fd\u00eda h\u00e1bil"}},"yaxis":{"showgrid":false},"plot_bgcolor":"#FAFBFC","paper_bgcolor":"white","height":260}}, cfg);
-  Plotly.newPlot('g2', {"data":[{"hovertemplate":"Seg. AA: %{y:.1f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#1E3A5F"},"name":"Seg. AA","x":["M. Alvarado","R. Castro","S. M\u00e9ndez","J. Rodr\u00edguez","L. P\u00e9rez"],"y":{"dtype":"f8","bdata":"AAAAAAAAVkCamZmZmblQQAAAAAAAAEdAZmZmZmZmK0BmZmZmZuZCQA=="},"type":"bar"},{"hovertemplate":"Seg. A: %{y:.1f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#00A99D"},"name":"Seg. A","x":["M. Alvarado","R. Castro","S. M\u00e9ndez","J. Rodr\u00edguez","L. P\u00e9rez"],"y":{"dtype":"f8","bdata":"mpmZmZmZJUAAAAAAAAA+QAAAAAAAwEZAzczMzMzMTEAzMzMzM3NAQA=="},"type":"bar"},{"hovertemplate":"Seg. B: %{y:.1f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#B0BEC5"},"name":"Seg. B","x":["M. Alvarado","R. Castro","S. M\u00e9ndez","J. Rodr\u00edguez","L. P\u00e9rez"],"y":{"dtype":"f8","bdata":"MzMzMzMz8z\u002fNzMzMzMwIQM3MzMzMzCBAmpmZmZmZPEDNzMzMzEw9QA=="},"type":"bar"}],"layout":{"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"font":{"size":13,"color":"#1E3A5F"},"text":"\u003cb\u003eG2 \u00b7 Mix Segmento por Facturador\u003c\u002fb\u003e","x":0},"margin":{"l":0,"r":10,"t":40,"b":10},"legend":{"font":{"size":11},"orientation":"h","y":-0.15},"yaxis":{"title":{"text":"% l\u00edneas"},"ticksuffix":"%"},"barmode":"stack","plot_bgcolor":"#FAFBFC","paper_bgcolor":"white","height":260}}, cfg);
-  Plotly.newPlot('g3', {"data":[{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eM. Alvarado\u003c\u002fextra\u003e","line":{"color":"#1E3A5F","width":2},"marker":{"size":5},"mode":"lines+markers","name":"M. Alvarado","x":["2026-05-01T00:00:00","2026-05-04T00:00:00","2026-05-05T00:00:00","2026-05-06T00:00:00","2026-05-07T00:00:00","2026-05-08T00:00:00","2026-05-11T00:00:00","2026-05-12T00:00:00","2026-05-13T00:00:00","2026-05-14T00:00:00","2026-05-15T00:00:00","2026-05-18T00:00:00","2026-05-19T00:00:00","2026-05-20T00:00:00","2026-05-21T00:00:00","2026-05-22T00:00:00","2026-05-25T00:00:00","2026-05-26T00:00:00","2026-05-27T00:00:00","2026-05-28T00:00:00","2026-05-29T00:00:00"],"y":{"dtype":"i2","bdata":"lQFSAXgBfQE1AX8BiwF8ASsBVwF2AYsBTQGhAXUBfwGIAUwBOQEkAWwB"},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eR. Castro\u003c\u002fextra\u003e","line":{"color":"#00A99D","width":2},"marker":{"size":5},"mode":"lines+markers","name":"R. Castro","x":["2026-05-01T00:00:00","2026-05-04T00:00:00","2026-05-05T00:00:00","2026-05-06T00:00:00","2026-05-07T00:00:00","2026-05-08T00:00:00","2026-05-11T00:00:00","2026-05-12T00:00:00","2026-05-13T00:00:00","2026-05-14T00:00:00","2026-05-15T00:00:00","2026-05-18T00:00:00","2026-05-19T00:00:00","2026-05-20T00:00:00","2026-05-21T00:00:00","2026-05-22T00:00:00","2026-05-25T00:00:00","2026-05-26T00:00:00","2026-05-27T00:00:00","2026-05-28T00:00:00","2026-05-29T00:00:00"],"y":{"dtype":"i2","bdata":"9gDVAAMBFQEBAeEA3QDkAPgA7QDYABMBuwDuANUAFQEcAfAADgHgAOkA"},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eS. M\u00e9ndez\u003c\u002fextra\u003e","line":{"color":"#7C3AED","width":2},"marker":{"size":5},"mode":"lines+markers","name":"S. M\u00e9ndez","x":["2026-05-01T00:00:00","2026-05-04T00:00:00","2026-05-05T00:00:00","2026-05-06T00:00:00","2026-05-07T00:00:00","2026-05-08T00:00:00","2026-05-11T00:00:00","2026-05-12T00:00:00","2026-05-13T00:00:00","2026-05-14T00:00:00","2026-05-15T00:00:00","2026-05-18T00:00:00","2026-05-19T00:00:00","2026-05-20T00:00:00","2026-05-21T00:00:00","2026-05-22T00:00:00","2026-05-25T00:00:00","2026-05-26T00:00:00","2026-05-27T00:00:00","2026-05-28T00:00:00","2026-05-29T00:00:00"],"y":{"dtype":"i2","bdata":"sQC5AKsA2gCtANkAnwCiAL4AjwCuANIApACgAHsA2gCzAIsA0gCmAI8A"},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eJ. Rodr\u00edguez\u003c\u002fextra\u003e","line":{"color":"#F4A261","width":2},"marker":{"size":5},"mode":"lines+markers","name":"J. Rodr\u00edguez","x":["2026-05-01T00:00:00","2026-05-04T00:00:00","2026-05-05T00:00:00","2026-05-06T00:00:00","2026-05-07T00:00:00","2026-05-08T00:00:00","2026-05-11T00:00:00","2026-05-12T00:00:00","2026-05-13T00:00:00","2026-05-14T00:00:00","2026-05-15T00:00:00","2026-05-18T00:00:00","2026-05-19T00:00:00","2026-05-20T00:00:00","2026-05-21T00:00:00","2026-05-22T00:00:00","2026-05-25T00:00:00","2026-05-26T00:00:00","2026-05-27T00:00:00","2026-05-28T00:00:00","2026-05-29T00:00:00"],"y":{"dtype":"i1","bdata":"V1dTQ1taVD4+PD9FUzBSW05cSDRP"},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eL. P\u00e9rez\u003c\u002fextra\u003e","line":{"color":"#E63946","width":2},"marker":{"size":5},"mode":"lines+markers","name":"L. P\u00e9rez","x":["2026-05-01T00:00:00","2026-05-04T00:00:00","2026-05-05T00:00:00","2026-05-06T00:00:00","2026-05-07T00:00:00","2026-05-08T00:00:00","2026-05-11T00:00:00","2026-05-12T00:00:00","2026-05-13T00:00:00","2026-05-14T00:00:00","2026-05-15T00:00:00","2026-05-18T00:00:00","2026-05-19T00:00:00","2026-05-20T00:00:00","2026-05-21T00:00:00","2026-05-22T00:00:00","2026-05-25T00:00:00","2026-05-26T00:00:00","2026-05-27T00:00:00","2026-05-28T00:00:00","2026-05-29T00:00:00"],"y":{"dtype":"i1","bdata":"Jz06YT5OKUwzNjUrOSxMNSgkNDsz"},"type":"scatter"}],"layout":{"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#F4A261","dash":"dot","width":1.5},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":181.8,"y1":181.8,"yref":"y"}],"annotations":[{"font":{"color":"#F4A261","size":10},"showarrow":false,"text":"Prom\u002fd\u00eda","x":0,"xanchor":"left","xref":"x domain","y":181.8,"yanchor":"bottom","yref":"y"}],"title":{"font":{"size":13,"color":"#1E3A5F"},"text":"\u003cb\u003eG3 \u00b7 Tendencia Diaria (solo L\u2013V)\u003c\u002fb\u003e","x":0},"margin":{"l":0,"r":10,"t":40,"b":10},"legend":{"font":{"size":10},"orientation":"h","y":-0.18},"xaxis":{"showgrid":true,"gridcolor":"#EEF1F5"},"yaxis":{"showgrid":true,"gridcolor":"#EEF1F5","title":{"text":"L\u00edneas procesadas"}},"plot_bgcolor":"#FAFBFC","paper_bgcolor":"white","height":280,"hovermode":"x unified"}}, cfg);
-  Plotly.newPlot('g4', {"data":[{"hovertemplate":"\u003cb\u003eM. Alvarado\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 9.6\u003cbr\u003eFacturas\u002fd\u00eda: 37.5\u003cbr\u003eMonto total: $4,111,495\u003cbr\u003eSeg. predominante: AA\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#1E3A5F","line":{"color":"white","width":1.5},"opacity":0.85,"size":35},"mode":"markers+text","showlegend":false,"text":["M. "],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[9.6],"y":[37.5],"type":"scatter"},{"hovertemplate":"\u003cb\u003eR. Castro\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 7.7\u003cbr\u003eFacturas\u002fd\u00eda: 31.4\u003cbr\u003eMonto total: $2,744,411\u003cbr\u003eSeg. predominante: AA\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#00A99D","line":{"color":"white","width":1.5},"opacity":0.85,"size":35},"mode":"markers+text","showlegend":false,"text":["R. "],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[7.7],"y":[31.4],"type":"scatter"},{"hovertemplate":"\u003cb\u003eS. M\u00e9ndez\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 5.8\u003cbr\u003eFacturas\u002fd\u00eda: 30.1\u003cbr\u003eMonto total: $1,965,568\u003cbr\u003eSeg. predominante: AA\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#7C3AED","line":{"color":"white","width":1.5},"opacity":0.85,"size":35},"mode":"markers+text","showlegend":false,"text":["S. "],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[5.8],"y":[30.1],"type":"scatter"},{"hovertemplate":"\u003cb\u003eJ. Rodr\u00edguez\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 3.5\u003cbr\u003eFacturas\u002fd\u00eda: 21.8\u003cbr\u003eMonto total: $857,752\u003cbr\u003eSeg. predominante: A\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#F4A261","line":{"color":"white","width":1.5},"opacity":0.85,"size":35},"mode":"markers+text","showlegend":false,"text":["J. "],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[3.5],"y":[21.8],"type":"scatter"},{"hovertemplate":"\u003cb\u003eL. P\u00e9rez\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 3.8\u003cbr\u003eFacturas\u002fd\u00eda: 14.8\u003cbr\u003eMonto total: $667,971\u003cbr\u003eSeg. predominante: AA\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946","line":{"color":"white","width":1.5},"opacity":0.85,"size":35},"mode":"markers+text","showlegend":false,"text":["L. "],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[3.8],"y":[14.8],"type":"scatter"}],"layout":{"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#CBD5E1","dash":"dot","width":1},"type":"line","x0":6.08,"x1":6.08,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"#CBD5E1","dash":"dot","width":1},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":27.119999999999997,"y1":27.119999999999997,"yref":"y"}],"title":{"font":{"size":13,"color":"#1E3A5F"},"text":"\u003cb\u003eG4 \u00b7 Velocidad vs Complejidad\u003c\u002fb\u003e","x":0},"margin":{"l":0,"r":10,"t":40,"b":10},"xaxis":{"title":{"text":"L\u00edneas por Factura (Complejidad \u2192)"},"showgrid":true,"gridcolor":"#EEF1F5"},"yaxis":{"title":{"text":"Facturas \u002f D\u00eda H\u00e1bil (Velocidad \u2192)"},"showgrid":true,"gridcolor":"#EEF1F5"},"plot_bgcolor":"#FAFBFC","paper_bgcolor":"white","height":280,"annotations":[{"font":{"color":"#94a3b8","size":9},"showarrow":false,"text":"\u2b50 Alto rendimiento","x":0.98,"xanchor":"right","xref":"paper","y":0.98,"yref":"paper"},{"font":{"color":"#E63946","size":9},"showarrow":false,"text":"\u26a0 Bajo rendimiento","x":0.02,"xanchor":"left","xref":"paper","y":0.02,"yref":"paper"}]}}, cfg);
+  const cfg = {responsive:true, displayModeBar:false};
+  Plotly.newPlot('g1', {"data":[{"hovertemplate":"\u003cb\u003eFaubricio Malcotti\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 0.0\u003cbr\u003eFacturas\u002fd\u00eda: 0.2\u003cbr\u003eL\u00edneas\u002ffactura: 0.0\u003cbr\u003eSeg. predominante: A\u003cbr\u003eCancelados: 30.8%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946"},"orientation":"h","showlegend":false,"text":" 0.0","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[0.0],"y":["Faubricio Malcotti"],"type":"bar"},{"hovertemplate":"\u003cb\u003erbautista\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 0.0\u003cbr\u003eFacturas\u002fd\u00eda: 0.0\u003cbr\u003eL\u00edneas\u002ffactura: 0.0\u003cbr\u003eSeg. predominante: B\u003cbr\u003eCancelados: 0.0%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946"},"orientation":"h","showlegend":false,"text":" 0.0","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[0.0],"y":["rbautista"],"type":"bar"},{"hovertemplate":"\u003cb\u003eElvis Martin\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 0.1\u003cbr\u003eFacturas\u002fd\u00eda: 0.0\u003cbr\u003eL\u00edneas\u002ffactura: 2.0\u003cbr\u003eSeg. predominante: A\u003cbr\u003eCancelados: 14.3%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946"},"orientation":"h","showlegend":false,"text":" 0.1","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[0.1],"y":["Elvis Martin"],"type":"bar"},{"hovertemplate":"\u003cb\u003eJesus Segovia\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 4.3\u003cbr\u003eFacturas\u002fd\u00eda: 0.5\u003cbr\u003eL\u00edneas\u002ffactura: 8.9\u003cbr\u003eSeg. predominante: A\u003cbr\u003eCancelados: 50.7%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946"},"orientation":"h","showlegend":false,"text":" 4.3","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[4.3],"y":["Jesus Segovia"],"type":"bar"},{"hovertemplate":"\u003cb\u003ecpinto\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 9.2\u003cbr\u003eFacturas\u002fd\u00eda: 0.5\u003cbr\u003eL\u00edneas\u002ffactura: 17.1\u003cbr\u003eSeg. predominante: A\u003cbr\u003eCancelados: 8.4%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946"},"orientation":"h","showlegend":false,"text":" 9.2","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[9.2],"y":["cpinto"],"type":"bar"},{"hovertemplate":"\u003cb\u003eCiro Camerlingo\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 42.9\u003cbr\u003eFacturas\u002fd\u00eda: 4.7\u003cbr\u003eL\u00edneas\u002ffactura: 9.1\u003cbr\u003eSeg. predominante: B\u003cbr\u003eCancelados: 50.2%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946"},"orientation":"h","showlegend":false,"text":" 42.9","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[42.9],"y":["Ciro Camerlingo"],"type":"bar"},{"hovertemplate":"\u003cb\u003eAlexander Espinel\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 59.8\u003cbr\u003eFacturas\u002fd\u00eda: 5.8\u003cbr\u003eL\u00edneas\u002ffactura: 10.4\u003cbr\u003eSeg. predominante: A\u003cbr\u003eCancelados: 37.0%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946"},"orientation":"h","showlegend":false,"text":" 59.8","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[59.8],"y":["Alexander Espinel"],"type":"bar"},{"hovertemplate":"\u003cb\u003eMaria Goncalves\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 144.1\u003cbr\u003eFacturas\u002fd\u00eda: 14.2\u003cbr\u003eL\u00edneas\u002ffactura: 10.2\u003cbr\u003eSeg. predominante: B\u003cbr\u003eCancelados: 17.4%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#3498DB"},"orientation":"h","showlegend":false,"text":" 144.1","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[144.1],"y":["Maria Goncalves"],"type":"bar"},{"hovertemplate":"\u003cb\u003eEndrina Diaz\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 180.3\u003cbr\u003eFacturas\u002fd\u00eda: 17.4\u003cbr\u003eL\u00edneas\u002ffactura: 10.4\u003cbr\u003eSeg. predominante: B\u003cbr\u003eCancelados: 51.5%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#2ECC71"},"orientation":"h","showlegend":false,"text":" 180.3","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[180.3],"y":["Endrina Diaz"],"type":"bar"},{"hovertemplate":"\u003cb\u003eLorianna Duno\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 180.8\u003cbr\u003eFacturas\u002fd\u00eda: 25.3\u003cbr\u003eL\u00edneas\u002ffactura: 7.2\u003cbr\u003eSeg. predominante: B\u003cbr\u003eCancelados: 22.3%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#2ECC71"},"orientation":"h","showlegend":false,"text":" 180.8","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[180.8],"y":["Lorianna Duno"],"type":"bar"},{"hovertemplate":"\u003cb\u003ecvelasquez\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 198.9\u003cbr\u003eFacturas\u002fd\u00eda: 20.1\u003cbr\u003eL\u00edneas\u002ffactura: 9.9\u003cbr\u003eSeg. predominante: A\u003cbr\u003eCancelados: 22.6%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#2ECC71"},"orientation":"h","showlegend":false,"text":" 198.9","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[198.9],"y":["cvelasquez"],"type":"bar"},{"hovertemplate":"\u003cb\u003eYeferly Neyaly\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 206.7\u003cbr\u003eFacturas\u002fd\u00eda: 31.2\u003cbr\u003eL\u00edneas\u002ffactura: 6.6\u003cbr\u003eSeg. predominante: B\u003cbr\u003eCancelados: 27.2%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#2ECC71"},"orientation":"h","showlegend":false,"text":" 206.7","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[206.7],"y":["Yeferly Neyaly"],"type":"bar"},{"hovertemplate":"\u003cb\u003eKarlys Cede\u00f1o\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 216.8\u003cbr\u003eFacturas\u002fd\u00eda: 32.4\u003cbr\u003eL\u00edneas\u002ffactura: 6.7\u003cbr\u003eSeg. predominante: B\u003cbr\u003eCancelados: 27.0%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#2ECC71"},"orientation":"h","showlegend":false,"text":" 216.8","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[216.8],"y":["Karlys Cede\u00f1o"],"type":"bar"},{"hovertemplate":"\u003cb\u003eSim\u00f3n Suarez\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 253.1\u003cbr\u003eFacturas\u002fd\u00eda: 24.5\u003cbr\u003eL\u00edneas\u002ffactura: 10.4\u003cbr\u003eSeg. predominante: B\u003cbr\u003eCancelados: 17.5%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#2ECC71"},"orientation":"h","showlegend":false,"text":" 253.1","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[253.1],"y":["Sim\u00f3n Suarez"],"type":"bar"},{"hovertemplate":"\u003cb\u003eAlix Agudelo\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002fd\u00eda: 302.8\u003cbr\u003eFacturas\u002fd\u00eda: 41.2\u003cbr\u003eL\u00edneas\u002ffactura: 7.4\u003cbr\u003eSeg. predominante: B\u003cbr\u003eCancelados: 22.2%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#2ECC71"},"orientation":"h","showlegend":false,"text":" 302.8","textfont":{"color":"#1E3A5F","size":11},"textposition":"outside","x":[302.8],"y":["Alix Agudelo"],"type":"bar"}],"layout":{"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#F4A261","dash":"dash","width":2},"type":"line","x0":128.6,"x1":128.6,"xref":"x","y0":0,"y1":1,"yref":"y domain"}],"annotations":[{"font":{"color":"#F4A261","size":11},"showarrow":false,"text":"Prom. 128.6","x":128.6,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"}],"font":{"family":"DM Sans, Segoe UI, sans-serif","color":"#334155"},"hoverlabel":{"font":{"color":"white","size":12},"bgcolor":"#1E3A5F","bordercolor":"#00A99D"},"margin":{"l":0,"r":60,"t":40,"b":10},"title":{"font":{"size":13,"color":"#1E3A5F"},"text":"\u003cb\u003eG1 \u00b7 Ranking L\u00edneas \u002f D\u00eda H\u00e1bil\u003c\u002fb\u003e","x":0},"xaxis":{"showgrid":true,"gridcolor":"#EEF1F5","title":{"text":"L\u00edneas\u002fd\u00eda h\u00e1bil"}},"yaxis":{"showgrid":false},"plot_bgcolor":"#FAFBFC","paper_bgcolor":"white","height":600}}, cfg);
+  Plotly.newPlot('g2', {"data":[{"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003eSeg. AA: %{y:.1f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#1E3A5F"},"name":"Seg. AA","x":["Alix Agudelo","Sim\u00f3n Suarez","Karlys Cede\u00f1o","Yeferly Neyaly","cvelasquez","Lorianna Duno","Endrina Diaz","Maria Goncalves","Alexander Espinel","Ciro Camerlingo","cpinto","Jesus Segovia","Elvis Martin","Faubricio Malcotti","rbautista"],"y":{"dtype":"f8","bdata":"mpmZmZmZuT8zMzMzM7MyQAAAAAAAABxAmpmZmZmZyT9mZmZmZmYuQJqZmZmZmbk\u002fAAAAAAAABEBmZmZmZmYcQAAAAAAAAAAAmpmZmZmZDUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},"type":"bar"},{"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003eSeg. A: %{y:.1f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#00A99D"},"name":"Seg. A","x":["Alix Agudelo","Sim\u00f3n Suarez","Karlys Cede\u00f1o","Yeferly Neyaly","cvelasquez","Lorianna Duno","Endrina Diaz","Maria Goncalves","Alexander Espinel","Ciro Camerlingo","cpinto","Jesus Segovia","Elvis Martin","Faubricio Malcotti","rbautista"],"y":{"dtype":"f8","bdata":"AAAAAACANEAAAAAAAIBAQDMzMzMzc0JAAAAAAADAQ0CamZmZmdlIQDMzMzMzM0dAmpmZmZmZJUBmZmZmZiZAQM3MzMzMLFRAzczMzMzMGkAAAAAAAABZQM3MzMzMLFRAAAAAAAAAWUAzMzMzMxNYQAAAAAAAAAAA"},"type":"bar"},{"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003eSeg. B: %{y:.1f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#B0BEC5"},"name":"Seg. B","x":["Alix Agudelo","Sim\u00f3n Suarez","Karlys Cede\u00f1o","Yeferly Neyaly","cvelasquez","Lorianna Duno","Endrina Diaz","Maria Goncalves","Alexander Espinel","Ciro Camerlingo","cpinto","Jesus Segovia","Elvis Martin","Faubricio Malcotti","rbautista"],"y":{"dtype":"f8","bdata":"mpmZmZnZU0BmZmZmZiZIQM3MzMzMDExAMzMzMzMzTkAAAAAAAIBBQDMzMzMzs0pAzczMzMysVUDNzMzMzExOQM3MzMzMTDNAZmZmZmZmVkAAAAAAAAAAAM3MzMzMTDNAAAAAAAAAAACamZmZmZkNQAAAAAAAAFlA"},"type":"bar"}],"layout":{"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"font":{"family":"DM Sans, Segoe UI, sans-serif","color":"#334155"},"hoverlabel":{"font":{"color":"white","size":12},"bgcolor":"#1E3A5F","bordercolor":"#00A99D"},"margin":{"l":10,"r":10,"t":40,"b":120},"title":{"font":{"size":13,"color":"#1E3A5F"},"text":"\u003cb\u003eG2 \u00b7 Mix Segmento Operativo por Facturador\u003c\u002fb\u003e","x":0},"legend":{"font":{"size":11},"orientation":"h","y":-0.38,"x":0},"yaxis":{"title":{"text":"% l\u00edneas"},"ticksuffix":"%","range":[0,105]},"xaxis":{"tickfont":{"size":10},"tickangle":-35},"plot_bgcolor":"#FAFBFC","paper_bgcolor":"white","barmode":"stack","height":360}}, cfg);
+  Plotly.newPlot('g3', {"data":[{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eAlexander Espinel\u003c\u002fextra\u003e","line":{"color":"#1E3A5F","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Alexander Espinel","visible":false,"x":["2026-01-02T00:00:00.000000000","2026-01-05T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-09T00:00:00.000000000","2026-01-12T00:00:00.000000000","2026-01-13T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-15T00:00:00.000000000","2026-01-16T00:00:00.000000000","2026-01-19T00:00:00.000000000","2026-01-20T00:00:00.000000000","2026-01-21T00:00:00.000000000","2026-01-22T00:00:00.000000000","2026-01-23T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-27T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-01-29T00:00:00.000000000","2026-01-30T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-03T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-05T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-09T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-12T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-16T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-20T00:00:00.000000000","2026-02-23T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-02-25T00:00:00.000000000","2026-02-26T00:00:00.000000000","2026-02-27T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-03T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-05T00:00:00.000000000","2026-03-06T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-12T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-16T00:00:00.000000000","2026-03-17T00:00:00.000000000","2026-03-18T00:00:00.000000000","2026-03-19T00:00:00.000000000","2026-03-20T00:00:00.000000000","2026-03-23T00:00:00.000000000","2026-03-24T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-27T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-03-31T00:00:00.000000000","2026-04-01T00:00:00.000000000","2026-04-02T00:00:00.000000000","2026-04-03T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-09T00:00:00.000000000","2026-04-10T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-16T00:00:00.000000000","2026-04-17T00:00:00.000000000","2026-04-21T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-27T00:00:00.000000000","2026-04-28T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-01T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-05T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-11T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-15T00:00:00.000000000","2026-05-18T00:00:00.000000000","2026-05-19T00:00:00.000000000","2026-05-20T00:00:00.000000000","2026-05-21T00:00:00.000000000","2026-05-22T00:00:00.000000000","2026-05-25T00:00:00.000000000","2026-05-26T00:00:00.000000000"],"y":{"dtype":"i2","bdata":"GwAKAE4AOgA+AGsAegBYAHYABQBfAAcAJwAuADUAMABdAFoARgBNAE0AIwA7ABEAQwADAEcAPQAeAEMAGQA3AD4AQwAvAAwABQAhAAwAIwAmAAsAOgAcAC8ANQAUAC0AWQBlAAgAsgA0AFwAIQBIAD0ASQAWAH0ALgBEADkAtQBaAGIBgABLABsAFAAFANsAWQB0AFQAPAA9ABoALABDABQAawAlAD8ARQASAEUAGwBgACcAAwBFAAUAagBfABAAOAA9AFsABwALAA=="},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eAlix Agudelo\u003c\u002fextra\u003e","line":{"color":"#00A99D","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Alix Agudelo","visible":true,"x":["2026-01-01T00:00:00.000000000","2026-01-02T00:00:00.000000000","2026-01-05T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-09T00:00:00.000000000","2026-01-12T00:00:00.000000000","2026-01-13T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-15T00:00:00.000000000","2026-01-16T00:00:00.000000000","2026-01-19T00:00:00.000000000","2026-01-20T00:00:00.000000000","2026-01-21T00:00:00.000000000","2026-01-22T00:00:00.000000000","2026-01-23T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-27T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-01-29T00:00:00.000000000","2026-01-30T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-03T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-05T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-09T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-12T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-20T00:00:00.000000000","2026-02-23T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-02-25T00:00:00.000000000","2026-02-26T00:00:00.000000000","2026-02-27T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-03T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-05T00:00:00.000000000","2026-03-06T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-12T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-16T00:00:00.000000000","2026-03-17T00:00:00.000000000","2026-03-18T00:00:00.000000000","2026-03-19T00:00:00.000000000","2026-03-20T00:00:00.000000000","2026-03-23T00:00:00.000000000","2026-03-24T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-27T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-04-01T00:00:00.000000000","2026-04-02T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-09T00:00:00.000000000","2026-04-10T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-16T00:00:00.000000000","2026-04-17T00:00:00.000000000","2026-04-20T00:00:00.000000000","2026-04-21T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-27T00:00:00.000000000","2026-04-28T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-01T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-05T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-11T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-15T00:00:00.000000000","2026-05-18T00:00:00.000000000","2026-05-19T00:00:00.000000000","2026-05-20T00:00:00.000000000","2026-05-21T00:00:00.000000000","2026-05-22T00:00:00.000000000","2026-05-25T00:00:00.000000000","2026-05-26T00:00:00.000000000"],"y":{"dtype":"i2","bdata":"CACEAX0C\u002fQAIAasADQGyAaYA\u002fADqADkBoQE2AWIB9QB5AbABJgFlAW4BwgCNAg4BcgF3AZUBBAL0AIgBogFeAU4BNAE4AYABsAHgAMYA3QAhANwB5gATAcsAFAGPAUIBDQEeAT0B+gG5ACMBjwFmARAC\u002fQBoAU8BgQGEAZUAbQAcARwB+wDqAB8BkAEWAVIBEwE9Aa4BqQA2ARoBNwFxAegAAgFDAAkCnAE+AQ8BsgDrAKcB+gDSAPIAFQGLAbwANQElAVQBngFxAQ=="},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eCiro Camerlingo\u003c\u002fextra\u003e","line":{"color":"#7C3AED","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Ciro Camerlingo","visible":false,"x":["2026-01-01T00:00:00.000000000","2026-01-02T00:00:00.000000000","2026-01-05T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-12T00:00:00.000000000","2026-01-13T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-15T00:00:00.000000000","2026-01-19T00:00:00.000000000","2026-01-20T00:00:00.000000000","2026-01-21T00:00:00.000000000","2026-01-23T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-01-29T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-03T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-09T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-12T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-16T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-20T00:00:00.000000000","2026-02-23T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-02-25T00:00:00.000000000","2026-02-26T00:00:00.000000000","2026-02-27T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-03T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-05T00:00:00.000000000","2026-03-06T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-12T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-16T00:00:00.000000000","2026-03-17T00:00:00.000000000","2026-03-18T00:00:00.000000000","2026-03-19T00:00:00.000000000","2026-03-20T00:00:00.000000000","2026-03-23T00:00:00.000000000","2026-03-24T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-27T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-03-31T00:00:00.000000000","2026-04-01T00:00:00.000000000","2026-04-02T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-09T00:00:00.000000000","2026-04-10T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-16T00:00:00.000000000","2026-04-17T00:00:00.000000000","2026-04-20T00:00:00.000000000","2026-04-21T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-28T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-05T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-22T00:00:00.000000000","2026-05-26T00:00:00.000000000"],"y":{"dtype":"i2","bdata":"KgAuALwAEwAmADwAeABjAGsAHgAOAE8AegAaAIIAUwBdACcALgAzACIABAA6AAkACwAmABYASwAvAAIAkgDKAGEA\u002fQAcACsAsAA2ACEADQAWAB4AJwCDAAMAEwArADMAQgAWAC0AFwAFACYAPAALAAsAMwAeABQAEwAUACkAKgBnAAwANQBwAIUAXABEAAEABAADAAEAPQACAB0ANgAYAAEACwACAB8AKgA="},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eElvis Martin\u003c\u002fextra\u003e","line":{"color":"#F4A261","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Elvis Martin","visible":false,"x":["2026-01-05T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-13T00:00:00.000000000"],"y":{"dtype":"i1","bdata":"CgEB"},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eEndrina Diaz\u003c\u002fextra\u003e","line":{"color":"#E63946","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Endrina Diaz","visible":false,"x":["2026-01-01T00:00:00.000000000","2026-01-02T00:00:00.000000000","2026-01-05T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-09T00:00:00.000000000","2026-01-12T00:00:00.000000000","2026-01-13T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-15T00:00:00.000000000","2026-01-16T00:00:00.000000000","2026-01-19T00:00:00.000000000","2026-01-20T00:00:00.000000000","2026-01-21T00:00:00.000000000","2026-01-22T00:00:00.000000000","2026-01-23T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-27T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-01-29T00:00:00.000000000","2026-01-30T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-03T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-05T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-09T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-12T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-16T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-20T00:00:00.000000000","2026-02-23T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-02-25T00:00:00.000000000","2026-02-26T00:00:00.000000000","2026-02-27T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-03T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-05T00:00:00.000000000","2026-03-06T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-12T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-16T00:00:00.000000000","2026-03-17T00:00:00.000000000","2026-03-18T00:00:00.000000000","2026-03-19T00:00:00.000000000","2026-03-20T00:00:00.000000000","2026-03-23T00:00:00.000000000","2026-03-24T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-27T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-03-31T00:00:00.000000000","2026-04-01T00:00:00.000000000","2026-04-02T00:00:00.000000000","2026-04-03T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-09T00:00:00.000000000","2026-04-10T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-16T00:00:00.000000000","2026-04-17T00:00:00.000000000","2026-04-20T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-27T00:00:00.000000000","2026-04-28T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-01T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-05T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-11T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-15T00:00:00.000000000","2026-05-18T00:00:00.000000000","2026-05-19T00:00:00.000000000","2026-05-20T00:00:00.000000000","2026-05-21T00:00:00.000000000","2026-05-22T00:00:00.000000000"],"y":{"dtype":"i2","bdata":"kgBoAYUAowCeALoA6QAcAZgA0QBHAQoB+gDBAJcAjwF8AOsAMgG3AOgAogC3AfYAtgCfASMBJgGyAGcBIQESAYwBFwBXAE0ApQCLAlUB8QDTANAAmQHfAH8AhQByAOUAjQAkAUUAkQAMAcwAbQBcAFwAiAG\u002fALQAOgCEABcBUgD2AJoAmADzAKcA0gAYAD8ArQBsABoABgAKACcAfgB5AKkA5QB8ALYAdABSAN0ApAC+AJwAbgDFAJYA0wBEAGIAVwAiAFEACQAgAA=="},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eFaubricio Malcotti\u003c\u002fextra\u003e","line":{"color":"#2563EB","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Faubricio Malcotti","visible":false,"x":["2026-01-05T00:00:00.000000000","2026-01-23T00:00:00.000000000","2026-01-27T00:00:00.000000000","2026-01-30T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-23T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-20T00:00:00.000000000","2026-04-21T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-01T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-22T00:00:00.000000000"],"y":{"dtype":"i1","bdata":"BQEBAQEBAQEBAQEBAgEBAQECAgE="},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eJesus Segovia\u003c\u002fextra\u003e","line":{"color":"#16A34A","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Jesus Segovia","visible":false,"x":["2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-19T00:00:00.000000000","2026-01-20T00:00:00.000000000","2026-01-21T00:00:00.000000000","2026-01-22T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-16T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-25T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-16T00:00:00.000000000","2026-04-03T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-27T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-15T00:00:00.000000000","2026-05-22T00:00:00.000000000"],"y":{"dtype":"i1","bdata":"DgUeGQIbAQIJCQEzEAMSAgYQAyAXAQQSGRcBEgECARUMARY="},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eKarlys Cede\u00f1o\u003c\u002fextra\u003e","line":{"color":"#D97706","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Karlys Cede\u00f1o","visible":true,"x":["2026-01-01T00:00:00.000000000","2026-01-02T00:00:00.000000000","2026-01-05T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-09T00:00:00.000000000","2026-01-12T00:00:00.000000000","2026-01-13T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-15T00:00:00.000000000","2026-01-16T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-27T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-01-29T00:00:00.000000000","2026-01-30T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-03T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-05T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-09T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-12T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-16T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-20T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-02-25T00:00:00.000000000","2026-02-26T00:00:00.000000000","2026-02-27T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-03T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-05T00:00:00.000000000","2026-03-06T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-12T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-16T00:00:00.000000000","2026-03-17T00:00:00.000000000","2026-03-18T00:00:00.000000000","2026-03-19T00:00:00.000000000","2026-03-20T00:00:00.000000000","2026-03-23T00:00:00.000000000","2026-03-24T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-27T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-03-31T00:00:00.000000000","2026-04-01T00:00:00.000000000","2026-04-02T00:00:00.000000000","2026-04-03T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-09T00:00:00.000000000","2026-04-10T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-16T00:00:00.000000000","2026-04-17T00:00:00.000000000","2026-04-20T00:00:00.000000000","2026-04-21T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-27T00:00:00.000000000","2026-04-28T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-01T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-05T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-11T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-15T00:00:00.000000000","2026-05-25T00:00:00.000000000","2026-05-26T00:00:00.000000000"],"y":{"dtype":"i2","bdata":"CQKsAPQAvwAEAQcBQgC5AX4B9QBwAL4AWAEIAZ4BPwAYAOABCAEgAcYAuwAKArwANAHmAKgAiQGuAA4BgADxAI8A2gCCAJoAYAHfAOAAngAcAR8BnwDbAHMACAFZAdUAwQHAAAMBugEOAfEAlgAkAVMBHABKAswA2ABpAckADgF4AHUB+gBQAfwA6wD4AJ0BdwDgAHgALQHaAJAAcAABAHcBAAG5AIkAyACSAEABsQD2AHIAbQBUAQAB"},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eLorianna Duno\u003c\u002fextra\u003e","line":{"color":"#9333EA","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Lorianna Duno","visible":false,"x":["2026-01-02T00:00:00.000000000","2026-01-05T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-09T00:00:00.000000000","2026-01-12T00:00:00.000000000","2026-01-13T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-15T00:00:00.000000000","2026-01-16T00:00:00.000000000","2026-01-19T00:00:00.000000000","2026-01-20T00:00:00.000000000","2026-01-21T00:00:00.000000000","2026-01-22T00:00:00.000000000","2026-01-23T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-27T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-01-29T00:00:00.000000000","2026-01-30T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-03T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-05T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-09T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-12T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-16T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-23T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-02-25T00:00:00.000000000","2026-02-26T00:00:00.000000000","2026-02-27T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-03T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-05T00:00:00.000000000","2026-03-06T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-12T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-16T00:00:00.000000000","2026-03-17T00:00:00.000000000","2026-03-18T00:00:00.000000000","2026-03-19T00:00:00.000000000","2026-03-20T00:00:00.000000000","2026-03-23T00:00:00.000000000","2026-03-24T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-27T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-03-31T00:00:00.000000000","2026-04-01T00:00:00.000000000","2026-04-02T00:00:00.000000000","2026-04-03T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-09T00:00:00.000000000","2026-04-10T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-16T00:00:00.000000000","2026-04-17T00:00:00.000000000","2026-04-20T00:00:00.000000000","2026-04-21T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-27T00:00:00.000000000","2026-04-28T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-01T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-05T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-15T00:00:00.000000000","2026-05-18T00:00:00.000000000","2026-05-19T00:00:00.000000000","2026-05-20T00:00:00.000000000","2026-05-21T00:00:00.000000000","2026-05-22T00:00:00.000000000","2026-05-25T00:00:00.000000000","2026-05-26T00:00:00.000000000"],"y":{"dtype":"i2","bdata":"gQCAAYQAoQBQAEgAugCFAIYAWgA3ACwBzQDQAIwAbQAOAdYAEwGAACIAIwHIAAABmQC+AO8AzgBsAMoAbQAQAQwBEQGHALYArwCVANQAAwDPAIUAhwCLAGsATQFnAG4AGQG7ADoBZACtAAEB2wB4AdYApgBHAcAAmwANAH0B\u002fQD3APwAtwDkAOYAQwBMAaYALQHgAE8A1wDwAKgAxgCYAPUArgCSAFcADwGnACIAjQCBAEwArwB1AKMAWgBHAY8ABAH8AK4A+QCoAA=="},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eMaria Goncalves\u003c\u002fextra\u003e","line":{"color":"#0891B2","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Maria Goncalves","visible":false,"x":["2026-01-01T00:00:00.000000000","2026-01-02T00:00:00.000000000","2026-01-05T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-09T00:00:00.000000000","2026-01-12T00:00:00.000000000","2026-01-13T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-15T00:00:00.000000000","2026-01-16T00:00:00.000000000","2026-01-19T00:00:00.000000000","2026-01-20T00:00:00.000000000","2026-01-21T00:00:00.000000000","2026-01-22T00:00:00.000000000","2026-01-23T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-27T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-01-29T00:00:00.000000000","2026-01-30T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-03T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-05T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-09T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-12T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-16T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-20T00:00:00.000000000","2026-02-23T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-02-25T00:00:00.000000000","2026-02-26T00:00:00.000000000","2026-02-27T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-03T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-05T00:00:00.000000000","2026-03-06T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-12T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-23T00:00:00.000000000","2026-03-24T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-27T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-03-31T00:00:00.000000000","2026-04-01T00:00:00.000000000","2026-04-02T00:00:00.000000000","2026-04-03T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-09T00:00:00.000000000","2026-04-10T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-16T00:00:00.000000000","2026-04-17T00:00:00.000000000","2026-04-20T00:00:00.000000000","2026-04-21T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-27T00:00:00.000000000","2026-04-28T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-01T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-05T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-11T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-15T00:00:00.000000000","2026-05-18T00:00:00.000000000","2026-05-19T00:00:00.000000000","2026-05-20T00:00:00.000000000","2026-05-21T00:00:00.000000000","2026-05-22T00:00:00.000000000","2026-05-25T00:00:00.000000000","2026-05-26T00:00:00.000000000"],"y":{"dtype":"i2","bdata":"uABPAMUAGwEkAckACwCOALoBmwFsAEkAhgBpAXQBfwAOAEAAgwD\u002fAJMAIgAmAKMA4gClAFMAiwCzABEBegAIAEAAmgAaAUYAAQBLAEUALQEgABwAUgD5AAoBCwFvADoAxwAfAUYAFwClANkA2QDVAA4ALwCcABcBiQBsAEgAlwASAVAABQBtAHUACwExAY8AmwCEAJwAqgAuAJgAaQDgAF8ABAB3AIEAAwG3AD8A7QDTAI0AHACzALcA7QDVAKsAdQA8AA=="},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eSim\u00f3n Suarez\u003c\u002fextra\u003e","line":{"color":"#DC2626","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Sim\u00f3n Suarez","visible":true,"x":["2026-01-02T00:00:00.000000000","2026-01-05T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-09T00:00:00.000000000","2026-01-12T00:00:00.000000000","2026-01-13T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-15T00:00:00.000000000","2026-01-16T00:00:00.000000000","2026-01-19T00:00:00.000000000","2026-01-20T00:00:00.000000000","2026-01-21T00:00:00.000000000","2026-01-22T00:00:00.000000000","2026-01-23T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-27T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-01-29T00:00:00.000000000","2026-01-30T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-03T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-05T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-09T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-12T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-16T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-20T00:00:00.000000000","2026-02-23T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-02-25T00:00:00.000000000","2026-02-26T00:00:00.000000000","2026-02-27T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-03T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-05T00:00:00.000000000","2026-03-06T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-12T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-16T00:00:00.000000000","2026-03-17T00:00:00.000000000","2026-03-18T00:00:00.000000000","2026-03-19T00:00:00.000000000","2026-03-20T00:00:00.000000000","2026-03-24T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-27T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-03-31T00:00:00.000000000","2026-04-01T00:00:00.000000000","2026-04-02T00:00:00.000000000","2026-04-03T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-09T00:00:00.000000000","2026-04-10T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-16T00:00:00.000000000","2026-04-17T00:00:00.000000000","2026-04-20T00:00:00.000000000","2026-04-21T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-27T00:00:00.000000000","2026-04-28T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-01T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-05T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-11T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-15T00:00:00.000000000","2026-05-18T00:00:00.000000000","2026-05-19T00:00:00.000000000","2026-05-20T00:00:00.000000000","2026-05-21T00:00:00.000000000","2026-05-22T00:00:00.000000000","2026-05-25T00:00:00.000000000","2026-05-26T00:00:00.000000000"],"y":{"dtype":"i2","bdata":"AwBYAVwBtwAYAhEAGgGfAZ0A+QE9AEwB1AE\u002fAf8BIwCeAFIB3gAxAdIA0QHIAdkAHgIiANAAOQG3ALUBHAAqAUEBIAGKARgAfwDjAOkACAFWAFsBJwGRABgBKwCMAYAB8QCbASEAPQE+Ac4AvwGYAC0BKwFIAQsAAwFRAe0AUgE6ADwBcwHJAOcBFwAJAeABvAD5AAsAGQF1AUoBHAEPAPwA6QC\u002fAO8ABADkALwB7QBxATkANQGHARUBEwE9ADEBZQHcAGkBbAAlAaUA"},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003eYeferly Neyaly\u003c\u002fextra\u003e","line":{"color":"#65A30D","width":2},"marker":{"size":4},"mode":"lines+markers","name":"Yeferly Neyaly","visible":true,"x":["2026-01-02T00:00:00.000000000","2026-01-05T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-09T00:00:00.000000000","2026-01-12T00:00:00.000000000","2026-01-13T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-15T00:00:00.000000000","2026-01-16T00:00:00.000000000","2026-01-19T00:00:00.000000000","2026-01-20T00:00:00.000000000","2026-01-21T00:00:00.000000000","2026-01-22T00:00:00.000000000","2026-01-23T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-27T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-01-29T00:00:00.000000000","2026-01-30T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-03T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-05T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-09T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-12T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-16T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-20T00:00:00.000000000","2026-02-23T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-02-26T00:00:00.000000000","2026-02-27T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-03T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-05T00:00:00.000000000","2026-03-06T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-12T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-16T00:00:00.000000000","2026-03-17T00:00:00.000000000","2026-03-18T00:00:00.000000000","2026-03-19T00:00:00.000000000","2026-03-20T00:00:00.000000000","2026-03-23T00:00:00.000000000","2026-03-24T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-27T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-04-01T00:00:00.000000000","2026-04-02T00:00:00.000000000","2026-04-03T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-09T00:00:00.000000000","2026-04-10T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-16T00:00:00.000000000","2026-04-17T00:00:00.000000000","2026-04-20T00:00:00.000000000","2026-04-21T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-27T00:00:00.000000000","2026-04-28T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-01T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-05T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-11T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-15T00:00:00.000000000","2026-05-18T00:00:00.000000000","2026-05-19T00:00:00.000000000","2026-05-20T00:00:00.000000000","2026-05-21T00:00:00.000000000","2026-05-22T00:00:00.000000000","2026-05-25T00:00:00.000000000","2026-05-26T00:00:00.000000000"],"y":{"dtype":"i2","bdata":"rgDsALsA1QDaAJUABgEXAR8AWQAaANAAtwCZAHAAlgDVAOYAkwCaAAEAewBwAMgAaQBvAAkB8ACzAO0AQQBvAfUAsADQAH0AxAClALUACwB1Aa4AtgDBAEkA9wDdAKwA5ABfABsB+QAtAaUAqgAyAdIACQEvAY8AVwCXAiEB2QByASkB+wD0AGgAPAEAAQQBgAFvAOwA9QDcAC8BZAAoAXoAGABrALMBgAGtALUA9ABcAHcByADdABIBrACkAX4B0QBRAZwA4QGzAA=="},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003ecpinto\u003c\u002fextra\u003e","line":{"color":"#7C3AED","width":2},"marker":{"size":4},"mode":"lines+markers","name":"cpinto","visible":false,"x":["2026-02-05T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-20T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-17T00:00:00.000000000","2026-03-18T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-03-31T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-11T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-19T00:00:00.000000000","2026-05-20T00:00:00.000000000","2026-05-21T00:00:00.000000000","2026-05-22T00:00:00.000000000","2026-05-25T00:00:00.000000000","2026-05-26T00:00:00.000000000"],"y":{"dtype":"i1","bdata":"HwYxGxojIx5NIhRTGTANECwrCyAOGgcVKBMFAxcaGhwREwM="},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003ecvelasquez\u003c\u002fextra\u003e","line":{"color":"#C2410C","width":2},"marker":{"size":4},"mode":"lines+markers","name":"cvelasquez","visible":true,"x":["2026-01-01T00:00:00.000000000","2026-01-02T00:00:00.000000000","2026-01-06T00:00:00.000000000","2026-01-07T00:00:00.000000000","2026-01-08T00:00:00.000000000","2026-01-09T00:00:00.000000000","2026-01-12T00:00:00.000000000","2026-01-13T00:00:00.000000000","2026-01-14T00:00:00.000000000","2026-01-15T00:00:00.000000000","2026-01-16T00:00:00.000000000","2026-01-19T00:00:00.000000000","2026-01-20T00:00:00.000000000","2026-01-21T00:00:00.000000000","2026-01-22T00:00:00.000000000","2026-01-23T00:00:00.000000000","2026-01-26T00:00:00.000000000","2026-01-27T00:00:00.000000000","2026-01-28T00:00:00.000000000","2026-01-29T00:00:00.000000000","2026-01-30T00:00:00.000000000","2026-02-02T00:00:00.000000000","2026-02-03T00:00:00.000000000","2026-02-04T00:00:00.000000000","2026-02-05T00:00:00.000000000","2026-02-06T00:00:00.000000000","2026-02-09T00:00:00.000000000","2026-02-10T00:00:00.000000000","2026-02-11T00:00:00.000000000","2026-02-12T00:00:00.000000000","2026-02-13T00:00:00.000000000","2026-02-16T00:00:00.000000000","2026-02-17T00:00:00.000000000","2026-02-18T00:00:00.000000000","2026-02-19T00:00:00.000000000","2026-02-20T00:00:00.000000000","2026-02-23T00:00:00.000000000","2026-02-24T00:00:00.000000000","2026-02-25T00:00:00.000000000","2026-02-26T00:00:00.000000000","2026-02-27T00:00:00.000000000","2026-03-02T00:00:00.000000000","2026-03-03T00:00:00.000000000","2026-03-04T00:00:00.000000000","2026-03-05T00:00:00.000000000","2026-03-06T00:00:00.000000000","2026-03-09T00:00:00.000000000","2026-03-10T00:00:00.000000000","2026-03-11T00:00:00.000000000","2026-03-12T00:00:00.000000000","2026-03-13T00:00:00.000000000","2026-03-16T00:00:00.000000000","2026-03-17T00:00:00.000000000","2026-03-18T00:00:00.000000000","2026-03-19T00:00:00.000000000","2026-03-20T00:00:00.000000000","2026-03-23T00:00:00.000000000","2026-03-24T00:00:00.000000000","2026-03-25T00:00:00.000000000","2026-03-26T00:00:00.000000000","2026-03-27T00:00:00.000000000","2026-03-30T00:00:00.000000000","2026-03-31T00:00:00.000000000","2026-04-01T00:00:00.000000000","2026-04-02T00:00:00.000000000","2026-04-03T00:00:00.000000000","2026-04-06T00:00:00.000000000","2026-04-07T00:00:00.000000000","2026-04-08T00:00:00.000000000","2026-04-09T00:00:00.000000000","2026-04-13T00:00:00.000000000","2026-04-14T00:00:00.000000000","2026-04-15T00:00:00.000000000","2026-04-16T00:00:00.000000000","2026-04-17T00:00:00.000000000","2026-04-20T00:00:00.000000000","2026-04-21T00:00:00.000000000","2026-04-22T00:00:00.000000000","2026-04-23T00:00:00.000000000","2026-04-24T00:00:00.000000000","2026-04-27T00:00:00.000000000","2026-04-28T00:00:00.000000000","2026-04-29T00:00:00.000000000","2026-04-30T00:00:00.000000000","2026-05-01T00:00:00.000000000","2026-05-04T00:00:00.000000000","2026-05-05T00:00:00.000000000","2026-05-06T00:00:00.000000000","2026-05-07T00:00:00.000000000","2026-05-08T00:00:00.000000000","2026-05-11T00:00:00.000000000","2026-05-12T00:00:00.000000000","2026-05-13T00:00:00.000000000","2026-05-14T00:00:00.000000000","2026-05-15T00:00:00.000000000","2026-05-18T00:00:00.000000000","2026-05-19T00:00:00.000000000","2026-05-20T00:00:00.000000000","2026-05-21T00:00:00.000000000","2026-05-22T00:00:00.000000000","2026-05-25T00:00:00.000000000","2026-05-26T00:00:00.000000000"],"y":{"dtype":"i2","bdata":"GQCpAQsBdgD3AHsBFwG5AKcA2AAKAQUBJQHRAN4AGAHtAJkByQCnAIkA7QA7ASwB\u002fgE6AOQALwGpAM0AOwB7AWYAcgDqAAcAYwA1ATsBnwAxANwB7ABjAOwAVQBBAQ0AYgDFAB0AAQHWAM8AsQBYAPkBrQB9AMMARAC2AJIBiQCCAdgAhAHmAIoA0wCrAOAAwABJAAgAAgGLAD0BOwEDAK4AzAByAM8APAClAI8A7wCaACIAfAGbAFkA+QAnANAAmADRAMoAsACnAOgA"},"type":"scatter"},{"hovertemplate":"%{x|%d %b}\u003cbr\u003eL\u00edneas: %{y}\u003cextra\u003erbautista\u003c\u002fextra\u003e","line":{"color":"#1E3A5F","width":2},"marker":{"size":4},"mode":"lines+markers","name":"rbautista","visible":false,"x":["2026-01-02T00:00:00.000000000","2026-01-08T00:00:00.000000000"],"y":{"dtype":"i1","bdata":"AQI="},"type":"scatter"}],"layout":{"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#F4A261","dash":"dot","width":1.5},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":128.6,"y1":128.6,"yref":"y"}],"annotations":[{"font":{"color":"#F4A261","size":10},"showarrow":false,"text":"Prom\u002fd\u00eda 128.6","x":0,"xanchor":"left","xref":"x domain","y":128.6,"yanchor":"bottom","yref":"y"}],"font":{"family":"DM Sans, Segoe UI, sans-serif","color":"#334155"},"hoverlabel":{"font":{"color":"white","size":12},"bgcolor":"#1E3A5F","bordercolor":"#00A99D"},"margin":{"l":0,"r":10,"t":40,"b":20},"title":{"font":{"size":13,"color":"#1E3A5F"},"text":"\u003cb\u003eG3 \u00b7 Tendencia Diaria de L\u00edneas (L\u2013V)\u003c\u002fb\u003e","x":0},"xaxis":{"showgrid":true,"gridcolor":"#EEF1F5"},"yaxis":{"showgrid":true,"gridcolor":"#EEF1F5","title":{"text":"L\u00edneas procesadas"}},"plot_bgcolor":"#FAFBFC","paper_bgcolor":"white","showlegend":false,"height":310,"hovermode":"x unified"}}, cfg);
+  Plotly.newPlot('g4', {"data":[{"hovertemplate":"\u003cb\u003eAlix Agudelo\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 7.4\u003cbr\u003eFacturas\u002fd\u00eda: 41.2\u003cbr\u003eMonto total: $2,167,366\u003cbr\u003eSeg. predominante: B\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#00A99D","line":{"color":"white","width":1.5},"opacity":0.85,"size":14.94159345402687},"mode":"markers+text","showlegend":false,"text":["AA"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[7.4],"y":[41.2],"type":"scatter"},{"hovertemplate":"\u003cb\u003eSim\u00f3n Suarez\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 10.4\u003cbr\u003eFacturas\u002fd\u00eda: 24.5\u003cbr\u003eMonto total: $2,298,945\u003cbr\u003eSeg. predominante: B\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#DC2626","line":{"color":"white","width":1.5},"opacity":0.85,"size":15.848688437261469},"mode":"markers+text","showlegend":false,"text":["SS"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[10.4],"y":[24.5],"type":"scatter"},{"hovertemplate":"\u003cb\u003eKarlys Cede\u00f1o\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 6.7\u003cbr\u003eFacturas\u002fd\u00eda: 32.4\u003cbr\u003eMonto total: $1,287,782\u003cbr\u003eSeg. predominante: B\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#D97706","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["KC"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[6.7],"y":[32.4],"type":"scatter"},{"hovertemplate":"\u003cb\u003eYeferly Neyaly\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 6.6\u003cbr\u003eFacturas\u002fd\u00eda: 31.2\u003cbr\u003eMonto total: $1,840,790\u003cbr\u003eSeg. predominante: B\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#65A30D","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["YN"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[6.6],"y":[31.2],"type":"scatter"},{"hovertemplate":"\u003cb\u003ecvelasquez\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 9.9\u003cbr\u003eFacturas\u002fd\u00eda: 20.1\u003cbr\u003eMonto total: $2,583,457\u003cbr\u003eSeg. predominante: A\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#C2410C","line":{"color":"white","width":1.5},"opacity":0.85,"size":17.810080434894317},"mode":"markers+text","showlegend":false,"text":["CV"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[9.9],"y":[20.1],"type":"scatter"},{"hovertemplate":"\u003cb\u003eLorianna Duno\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 7.2\u003cbr\u003eFacturas\u002fd\u00eda: 25.3\u003cbr\u003eMonto total: $1,378,587\u003cbr\u003eSeg. predominante: B\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#9333EA","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["LD"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[7.2],"y":[25.3],"type":"scatter"},{"hovertemplate":"\u003cb\u003eEndrina Diaz\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 10.4\u003cbr\u003eFacturas\u002fd\u00eda: 17.4\u003cbr\u003eMonto total: $1,122,304\u003cbr\u003eSeg. predominante: B\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#E63946","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["ED"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[10.4],"y":[17.4],"type":"scatter"},{"hovertemplate":"\u003cb\u003eMaria Goncalves\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 10.2\u003cbr\u003eFacturas\u002fd\u00eda: 14.2\u003cbr\u003eMonto total: $1,272,174\u003cbr\u003eSeg. predominante: B\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#0891B2","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["MG"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[10.2],"y":[14.2],"type":"scatter"},{"hovertemplate":"\u003cb\u003eAlexander Espinel\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 10.4\u003cbr\u003eFacturas\u002fd\u00eda: 5.8\u003cbr\u003eMonto total: $5,076,956\u003cbr\u003eSeg. predominante: A\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#1E3A5F","line":{"color":"white","width":1.5},"opacity":0.85,"size":35.0},"mode":"markers+text","showlegend":false,"text":["AE"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[10.4],"y":[5.8],"type":"scatter"},{"hovertemplate":"\u003cb\u003eCiro Camerlingo\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 9.1\u003cbr\u003eFacturas\u002fd\u00eda: 4.7\u003cbr\u003eMonto total: $1,021,578\u003cbr\u003eSeg. predominante: B\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#7C3AED","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["CC"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[9.1],"y":[4.7],"type":"scatter"},{"hovertemplate":"\u003cb\u003ecpinto\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 17.1\u003cbr\u003eFacturas\u002fd\u00eda: 0.5\u003cbr\u003eMonto total: $298,420\u003cbr\u003eSeg. predominante: A\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#7C3AED","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["CP"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[17.1],"y":[0.5],"type":"scatter"},{"hovertemplate":"\u003cb\u003eJesus Segovia\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 8.9\u003cbr\u003eFacturas\u002fd\u00eda: 0.5\u003cbr\u003eMonto total: $327,087\u003cbr\u003eSeg. predominante: A\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#16A34A","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["JS"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[8.9],"y":[0.5],"type":"scatter"},{"hovertemplate":"\u003cb\u003eElvis Martin\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 2.0\u003cbr\u003eFacturas\u002fd\u00eda: 0.0\u003cbr\u003eMonto total: $17,492\u003cbr\u003eSeg. predominante: A\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#F4A261","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["EM"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[2.0],"y":[0.0],"type":"scatter"},{"hovertemplate":"\u003cb\u003eFaubricio Malcotti\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 0.0\u003cbr\u003eFacturas\u002fd\u00eda: 0.2\u003cbr\u003eMonto total: $109,776\u003cbr\u003eSeg. predominante: A\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#2563EB","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["FM"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[0.0],"y":[0.2],"type":"scatter"},{"hovertemplate":"\u003cb\u003erbautista\u003c\u002fb\u003e\u003cbr\u003eL\u00edneas\u002ffactura: 0.0\u003cbr\u003eFacturas\u002fd\u00eda: 0.0\u003cbr\u003eMonto total: $1,156\u003cbr\u003eSeg. predominante: B\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#1E3A5F","line":{"color":"white","width":1.5},"opacity":0.85,"size":14},"mode":"markers+text","showlegend":false,"text":["RB"],"textfont":{"color":"white","family":"Arial Black","size":9},"textposition":"middle center","x":[0.0],"y":[0.0],"type":"scatter"}],"layout":{"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#CBD5E1","dash":"dot","width":1},"type":"line","x0":7.753333333333334,"x1":7.753333333333334,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"#CBD5E1","dash":"dot","width":1},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":14.533333333333333,"y1":14.533333333333333,"yref":"y"}],"font":{"family":"DM Sans, Segoe UI, sans-serif","color":"#334155"},"hoverlabel":{"font":{"color":"white","size":12},"bgcolor":"#1E3A5F","bordercolor":"#00A99D"},"margin":{"l":0,"r":10,"t":40,"b":10},"title":{"font":{"size":13,"color":"#1E3A5F"},"text":"\u003cb\u003eG4 \u00b7 Velocidad vs Complejidad\u003c\u002fb\u003e","x":0},"xaxis":{"title":{"text":"L\u00edneas por Factura (Complejidad \u2192)"},"showgrid":true,"gridcolor":"#EEF1F5"},"yaxis":{"title":{"text":"Facturas \u002f D\u00eda H\u00e1bil (Velocidad \u2192)"},"showgrid":true,"gridcolor":"#EEF1F5"},"plot_bgcolor":"#FAFBFC","paper_bgcolor":"white","height":310,"annotations":[{"font":{"color":"#94a3b8","size":9},"showarrow":false,"text":"\u2b50 Alta complejidad + velocidad","x":0.98,"xanchor":"right","xref":"paper","y":0.98,"yref":"paper"},{"font":{"color":"#E63946","size":9},"showarrow":false,"text":"\u26a0 Revisar","x":0.02,"xanchor":"left","xref":"paper","y":0.02,"yref":"paper"}]}}, cfg);
+
+  // ── G3 FILTRO VENDEDOR ──────────────────────────────────────
+  const G3_FACTS  = ["Alexander Espinel", "Alix Agudelo", "Ciro Camerlingo", "Elvis Martin", "Endrina Diaz", "Faubricio Malcotti", "Jesus Segovia", "Karlys Cede\u00f1o", "Lorianna Duno", "Maria Goncalves", "Sim\u00f3n Suarez", "Yeferly Neyaly", "cpinto", "cvelasquez", "rbautista"];
+  const G3_TOP5   = ["Alix Agudelo", "Sim\u00f3n Suarez", "Karlys Cede\u00f1o", "Yeferly Neyaly", "cvelasquez"];
+  const G3_COLORS = ["#1E3A5F", "#00A99D", "#7C3AED", "#F4A261", "#E63946", "#2563EB", "#16A34A", "#D97706", "#9333EA", "#0891B2", "#DC2626", "#65A30D", "#7C3AED", "#C2410C", "#1E3A5F"];
+
+  // Estado actual de visibilidad (sincronizado con Plotly)
+  let g3Visible = {};
+  G3_FACTS.forEach((f, i) => {
+    g3Visible[f] = G3_TOP5.includes(f);
+  });
+
+  // Renderizar checkboxes
+  function buildG3Filters() {
+    const container = document.getElementById('g3-filters');
+    container.innerHTML = '';
+    G3_FACTS.forEach((nombre, idx) => {
+      const color = G3_COLORS[idx];
+      const isActive = g3Visible[nombre];
+      const label = document.createElement('label');
+      label.className = 'g3-check-label' + (isActive ? ' active' : '');
+      label.style.setProperty('--c', color);
+      label.innerHTML = `
+        <input type="checkbox" ${isActive ? 'checked' : ''} style="display:none"
+               onchange="g3Toggle('${nombre}', ${idx}, this.checked, '${color}')">
+        <div class="g3-dot" style="background:${color}"></div>
+        <span>${nombre}</span>`;
+      container.appendChild(label);
+    });
+  }
+
+  function g3Toggle(nombre, idx, checked, color) {
+    g3Visible[nombre] = checked;
+    Plotly.restyle('g3', {visible: checked}, [idx]);
+    buildG3Filters();
+  }
+
+  function g3SetTop5() {
+    G3_FACTS.forEach((f, i) => {
+      g3Visible[f] = G3_TOP5.includes(f);
+    });
+    const visArr = G3_FACTS.map(f => g3Visible[f]);
+    Plotly.restyle('g3', {visible: visArr}, G3_FACTS.map((_, i) => i));
+    buildG3Filters();
+  }
+
+  function g3SetAll() {
+    G3_FACTS.forEach(f => g3Visible[f] = true);
+    const visArr = G3_FACTS.map(() => true);
+    Plotly.restyle('g3', {visible: visArr}, G3_FACTS.map((_, i) => i));
+    buildG3Filters();
+  }
+
+  function g3Clear() {
+    G3_FACTS.forEach(f => g3Visible[f] = false);
+    const visArr = G3_FACTS.map(() => false);
+    Plotly.restyle('g3', {visible: visArr}, G3_FACTS.map((_, i) => i));
+    buildG3Filters();
+  }
+
+  // Init
+  buildG3Filters();
 </script>
 </body>
 </html>
